@@ -1,5 +1,4 @@
 from tkinter import *
-<<<<<<< HEAD
 from tkinter import ttk
 import Homepage  # Import file homepage.py
 
@@ -7,20 +6,14 @@ import Homepage  # Import file homepage.py
 def open_homepage():
     root_login.destroy()
     Homepage.homepage()
-=======
-import AD_Home
-import Homepage2
-
-
+# import AD_Home
+#
+#
 def run_program():
     user_input = text_tentk.get("1.0", "end-1c")
     if user_input == "A":
         root_login.destroy()
-        AD_Home.ad_home()
-    elif user_input == "2":
-        root_login.destroy()
-        Homepage2.homepage2()
->>>>>>> Lần commit đầu tiên
+#         AD_Home.ad_home()
 
 
 root_login = Tk()
@@ -28,7 +21,6 @@ root_login.title("Đăng nhập")
 
 root_login.state('zoomed')
 
-<<<<<<< HEAD
 label_dn = Label(root_login, text="ĐĂNG NHẬP BẰNG TÀI KHOẢN", font=("Arial", 25, "bold"), fg="#34495E")
 label_dn.place(relx=0.5, rely=0.16, anchor=CENTER)  # Đặt ở phía trên cửa sổ
 
@@ -53,7 +45,7 @@ button_quenmk.place(relx=0.693, rely=0.6)
 button_dn = Button(frame, width=29, height=1, text="Đăng nhập", font=("Arial", 14, "bold"), bg="#34495E", fg="white",
                    command=open_homepage)
 button_dn.place(relx=0.1, rely=0.74)
-=======
+
 label_dn = Label(root_login, text="ĐĂNG NHẬP BẰNG TÀI KHOẢN", font=("Arial", 25, "bold"), fg="blue")
 label_dn.place(relx=0.5, rely=0.16, anchor=CENTER)  # Đặt ở phía trên cửa sổ
 
@@ -78,6 +70,5 @@ button_quenmk.place(relx=0.693, rely=0.64)
 button_dn = Button(frame, width=29, height=1, text="ĐĂNG NHẬP", font=("Arial", 14, "bold"), bg="#4682B4", fg="white",
                    command=run_program)
 button_dn.place(relx=0.1, rely=0.78)
->>>>>>> Lần commit đầu tiên
 
 root_login.mainloop()

@@ -1,47 +1,46 @@
-import cv2
+from tkinter import *
+from tkinter import ttk
+import AD_Home
+import Homepage
 
-# Tải mô hình phát hiện khuôn mặt từ OpenCV
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
-# Mở camera
-cap = cv2.VideoCapture(0)
+def run_program():
+    user_input = text_tentk.get("1.0", "end-1c")
+    if user_input == "A":
+        root_login.destroy()
+        Homepage.homepage()
+    elif user_input == "2":
+        pass
 
-# Kiểm tra camera có mở thành công không
-if not cap.isOpened():
-    print("No thể mở camera")
-    exit()
 
-while True:
-    # Đọc khung hình từ camera
-    ret, frame = cap.read()
+root_login = Tk()
+root_login.title("Đăng nhập")
 
-    if not ret:
-        print("Không thể nhận khung hình từ camera")
-        break
+root_login.state('zoomed')
 
-    # Chuyển khung hình sang xám để phát hiện khuôn mặt
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+label_dn = Label(root_login, text="ĐĂNG NHẬP BẰNG TÀI KHOẢN", font=("Arial", 25, "bold"), fg="#34495E")
+label_dn.place(relx=0.5, rely=0.16, anchor=CENTER)  # Đặt ở phía trên cửa sổ
 
-    # Phát hiện các khuôn mặt
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+frame = Frame(root_login, height=340, width=450, borderwidth=3, bg="white")
+frame.place(relx=0.5, rely=0.5, anchor=CENTER)  # Đặt khung ở giữa màn hình
 
-    # Vẽ khung hình chữ nhật xung quanh mỗi khuôn mặt
-    for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+label_tentk = Label(frame, text="Tài khoản", font=("Arial", 12, "bold"), fg="#34495E", bg="white")
+label_tentk.place(relx=0.1, rely=0.1)
 
-        # Tự động chụp ảnh khi phát hiện khuôn mặt
-        if len(faces) > 0:
-            cv2.imwrite('face_capture.png', frame)
-            print("Đã chụp ảnh khuôn mặt!")
-            break
+text_tentk = Text(frame, width=44, height=1.5, borderwidth=1, relief=SOLID)
+text_tentk.place(relx=0.1, rely=0.2)
 
-    # Hiển thị khung hình
-    cv2.imshow('Camera', frame)
+label_mk = Label(frame, text="Mật khẩu", font=("Arial", 12, "bold"), fg="#34495E", bg="white")
+label_mk.place(relx=0.1, rely=0.37)
 
-    # Nhấn phím 'q' để thoát
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+text_mk = Text(frame, width=44, height=1.5, borderwidth=1, relief=SOLID)
+text_mk.place(relx=0.1, rely=0.47)
 
-# Giải phóng tài nguyên và đóng cửa sổ
-cap.release()
-cv2.destroyAllWindows()
+button_quenmk = Button(frame, width=12, height=1, text="Quên mật khẩu?", fg="#34495E", bg="white", relief=FLAT)
+button_quenmk.place(relx=0.693, rely=0.6)
+
+button_dn = Button(frame, width=29, height=1, text="Đăng nhập", font=("Arial", 14, "bold"), bg="#34495E", fg="white",
+                   command=run_program)
+button_dn.place(relx=0.1, rely=0.74)
+
+root_login.mainloop()
