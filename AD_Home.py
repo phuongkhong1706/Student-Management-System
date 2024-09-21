@@ -51,6 +51,7 @@ def ad_home():
     image_kehoach = create_image("./icon/learning.png", 45, 45)
     image_hocphi = create_image("./icon/tuitionfee.png", 45, 45)
     image_logout = create_image("./icon/logout.png", 45, 45)
+    image_hethong = create_image("./icon/system.png", 45, 45)
     image_meoqan = create_image("./icon/meoqan.jpg", 200, 200)
 
     label_hp = Label(frame_hp, height=150, image=image_hp, anchor=CENTER,
@@ -67,10 +68,10 @@ def ad_home():
         ad_button_dx.pack_forget()
         ad_label_none.pack_forget()
 
-        ad_button_tk_tttk.pack(anchor='w', padx=10, pady=5)
-        ad_button_tk_dmk.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht.pack(anchor='w', padx=10, pady=5)
-        ad_button_dx.pack(anchor='w', padx=10, pady=5)
+        ad_button_tk_tttk.pack(anchor='w', padx=0, pady=5)
+        ad_button_tk_dmk.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht.pack(anchor='w', padx=0, pady=5)
+        ad_button_dx.pack(anchor='w', padx=0, pady=5)
         ad_label_none.pack()
 
     ad_button_home = Button(frame_hp, text="    Trang chủ", font=("Arial", 14, "bold"),
@@ -90,7 +91,7 @@ def ad_home():
 
     ad_button_tk_tttk = Button(frame_hp, text="    Thông tin tài khoản", font=("Arial", 14, "bold"),
                                fg="white", bg="#34495E", borderwidth=0, compound="left",
-                               image=image_tk, command=select_ad_button_tk_tttk)
+                               width=290, height=1, anchor="w", padx=64, command=select_ad_button_tk_tttk)
 
     def select_ad_button_tk_dmk():
         ad_root_homepage.destroy()
@@ -98,7 +99,7 @@ def ad_home():
 
     ad_button_tk_dmk = Button(frame_hp, text="    Đổi mật khẩu", font=("Arial", 14, "bold"),
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
-                              image=image_tk, command=select_ad_button_tk_dmk)
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_tk_dmk)
 
     def atv_ad_button_ht():
         ad_button_tk_tttk.pack_forget()
@@ -106,19 +107,19 @@ def ad_home():
         ad_button_dx.pack_forget()
         ad_label_none.pack_forget()
 
-        ad_button_ht_ctk.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht_xtk.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht_clmk.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht_xlshd.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht_pq.pack(anchor='w', padx=10, pady=5)
+        ad_button_ht_ctk.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht_xtk.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht_clmk.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht_xlshd.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht_pq.pack(anchor='w', padx=0, pady=5)
 
-        ad_button_dx.pack(anchor='w', padx=10, pady=5)
+        ad_button_dx.pack(anchor='w', padx=0, pady=5)
         ad_label_none.pack()
 
     ad_button_ht = Button(frame_hp, text="    Hệ thống", font=("Arial", 14, "bold"),
-                          fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_tk,
-                          command=atv_ad_button_ht)
-    ad_button_ht.pack(anchor='w', padx=10, pady=5)
+                          fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_hethong,
+                          width=290, height=50, anchor="w", padx=10, command=atv_ad_button_ht)
+    ad_button_ht.pack(anchor='w', padx=0, pady=5)
 
     def select_ad_button_ht_ctk():
         ad_root_homepage.destroy()
@@ -126,23 +127,28 @@ def ad_home():
 
     ad_button_ht_ctk = Button(frame_hp, text="    Cấp tài khoản", font=("Arial", 14, "bold"),
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
-                              image=image_tk, command=select_ad_button_ht_ctk)
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_ctk)
 
     ad_button_ht_xtk = Button(frame_hp, text="    Xóa tài khoản", font=("Arial", 14, "bold"),
-                              fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_tk)
+                              fg="white", bg="#34495E", borderwidth=0, compound="left",
+                              width=290, height=1, anchor="w", padx=64)
 
     ad_button_ht_clmk = Button(frame_hp, text="    Cấp lại mật khẩu", font=("Arial", 14, "bold"),
-                               fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_tk)
+                               fg="white", bg="#34495E", borderwidth=0, compound="left",
+                               width=290, height=1, anchor="w", padx=64)
 
     ad_button_ht_xlshd = Button(frame_hp, text="    Lịch sử hoạt động", font=("Arial", 14, "bold"),
-                                fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_tk)
+                                fg="white", bg="#34495E", borderwidth=0, compound="left",
+                                width=290, height=1, anchor="w", padx=64)
 
     ad_button_ht_pq = Button(frame_hp, text="    Phân quyền", font=("Arial", 14, "bold"),
-                             fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_tk)
+                             fg="white", bg="#34495E", borderwidth=0, compound="left",
+                             width=290, height=1, anchor="w", padx=64)
 
     ad_button_dx = Button(frame_hp, text="    Đăng xuất", font=("Arial", 14, "bold"),
-                          fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_tk)
-    ad_button_dx.pack(anchor='w', padx=10, pady=5)
+                          fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_logout,
+                          width=290, height=50, anchor="w", padx=10)
+    ad_button_dx.pack(anchor='w', padx=0, pady=5)
 
     ad_label_none = Label(frame_hp, bg="#34495E", borderwidth=0, height=1000)
     ad_label_none.pack()
