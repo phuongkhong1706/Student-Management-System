@@ -43,8 +43,8 @@ def ad_createaccount():
 
         return photo
 
-    image_hp = create_image("./icon/system.png", 90, 90)
-    image_bt = create_image("./icon/system.png", 50, 50)
+    image_hp = create_image("C://Users//ASUS//Desktop//python-logo.png", 90, 90)
+    image_bt = create_image("C://Users//ASUS//Desktop//python-logo.png", 50, 50)
 
     label_hp = Label(frame_hp, width=200, height=150, image=image_hp, anchor=CENTER,
                      borderwidth=0, bg="#4682B4")
