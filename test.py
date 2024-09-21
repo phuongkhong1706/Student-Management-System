@@ -8,7 +8,7 @@ cap = cv2.VideoCapture(0)
 
 # Kiểm tra camera có mở thành công không
 if not cap.isOpened():
-    print("Không thể mở camera")
+    print("No thể mở camera")
     exit()
 
 while True:
