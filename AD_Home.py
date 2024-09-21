@@ -51,6 +51,7 @@ def ad_home():
     image_kehoach = create_image("./icon/learning.png", 45, 45)
     image_hocphi = create_image("./icon/tuitionfee.png", 45, 45)
     image_logout = create_image("./icon/logout.png", 45, 45)
+    image_meoqan = create_image("./icon/meoqan.jpg", 200, 200)
 
     label_hp = Label(frame_hp, height=150, image=image_hp, anchor=CENTER,
                      borderwidth=0, bg="#34495E")
@@ -144,13 +145,16 @@ def ad_home():
     ad_label_none = Label(frame_hp, bg="#34495E", borderwidth=0, height=1000)
     ad_label_none.pack()
 
-    ad_label = Label(ad_root_homepage, text="   Trang chủ", fg="white", font=("Arial", 16, "bold"),
-                     borderwidth=2, relief=RAISED, width=81, height=2, anchor='w', bg="#34495E")
-    ad_label.place(x=282, y=0)
+    ad_label = Label(ad_root_homepage, text="   Trang chủ", fg="#34495E", font=("Arial", 16, "bold"),
+                     borderwidth=0, relief=RAISED, width=81, height=2, anchor='w', bg="#DEE3EB")
+    ad_label.place(x=290, y=0)
 
-    ad_label_content = Label(ad_root_homepage, text="  PHẦN MỀM ĐỘC HẠI",
+    ad_label_content = Label(ad_root_homepage, text="  Tổ hợp cuti meo qăn",
                              fg="blue", font=("Arial", 16, "bold"),
-                             borderwidth=2, relief=RAISED, width=81, height=30, anchor=CENTER)
-    ad_label_content.place(x=282, y=50)
+                             borderwidth=0, relief=RAISED, width=81, height=30, anchor=CENTER)
+    ad_label_content.place(x=290, y=50)
+
+    ad_image = Label(ad_root_homepage, image=image_meoqan)
+    ad_image.place(x=720, y=150)
 
     ad_root_homepage.mainloop()
