@@ -6,7 +6,7 @@ from tkinter import ttk
 def create_table():
     # Tạo cửa sổ tkinter
     root = tk.Tk()
-    root.title("Giao diện Bảng")
+    root.title("Giao diện Bảng test")
 
     # Tạo widget Treeview
     tree = ttk.Treeview(root, columns=("ID", "Tên", "Tuổi", "Thành phố"), show="headings")
