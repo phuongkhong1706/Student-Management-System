@@ -44,8 +44,8 @@ def ad_home():
 
     image_hp = create_image("./icon/icons8-scaler-academy-144.png",
                             120, 120)
-    image_home = create_image("./icon/homepage.png", 50, 50)
-    image_tk = create_image("./icon/account.png", 45, 45)
+    image_home = create_image("./icon/home.png", 45, 45)
+    image_tk = create_image("./icon/user.png", 45, 45)
     image_kqht = create_image("./icon/kqht.png", 45, 45)
     image_hdnk = create_image("./icon/extraact.png", 45, 45)
     image_kehoach = create_image("./icon/learning.png", 45, 45)
@@ -74,13 +74,15 @@ def ad_home():
         ad_label_none.pack()
 
     ad_button_home = Button(frame_hp, text="    Trang chủ", font=("Arial", 14, "bold"),
-                            fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_home)
-    ad_button_home.pack(anchor='w', padx=10, pady=5)
+                            fg="white", bg="#34495E", borderwidth=0, compound="left",
+                            image=image_home, width=290, height=50, anchor="w", padx=10)
+    ad_button_home.pack(anchor='w', padx=0, pady=5)
 
     ad_button_tk = Button(frame_hp, text="    Tài khoản", font=("Arial", 14, "bold"),
-                          fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_tk,
+                          fg="white", bg="#34495E", borderwidth=0, compound="left",
+                          image=image_tk, width=290, height=50, anchor="w", padx=10,
                           command=atv_ad_button_tk)
-    ad_button_tk.pack(anchor='w', padx=10, pady=5)
+    ad_button_tk.pack(anchor='w', padx=0, pady=5)
 
     def select_ad_button_tk_tttk():
         ad_root_homepage.destroy()
