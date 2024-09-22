@@ -52,7 +52,6 @@ def ad_home():
     image_hocphi = create_image("./icon/tuitionfee.png", 45, 45)
     image_logout = create_image("./icon/logout.png", 45, 45)
     image_hethong = create_image("./icon/system.png", 45, 45)
-    image_meoqan = create_image("./icon/meoqan.jpg", 200, 200)
 
     label_hp = Label(frame_hp, height=150, image=image_hp, anchor=CENTER,
                      borderwidth=0, bg="#34495E")

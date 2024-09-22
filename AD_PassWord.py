@@ -146,42 +146,42 @@ def ad_password():
                           width=290, height=50, anchor="w", padx=10)
     ad_button_dx.pack(anchor='w', padx=0, pady=5)
 
-    ad_label_none = Label(frame_hp, bg="#4682B4", borderwidth=0, height=1000)
+    ad_label_none = Label(frame_hp, bg="#34495E", borderwidth=0, height=1000)
     ad_label_none.pack()
 
     ad_label = Label(ad_root_password, text="   Đổi mật khẩu", fg="#34495E", font=("Arial", 16, "bold"),
                      borderwidth=0, relief=RAISED, width=81, height=2, anchor='w', bg="#DEE3EB")
     ad_label.place(x=292, y=0)
 
-    ad_label_matk = Label(ad_root_password, text="Mã tài khoản", fg="#4682B4", font=("Arial", 12, "bold"),
+    ad_label_matk = Label(ad_root_password, text="Mã tài khoản", fg="#34495E", font=("Arial", 12, "bold"),
                           borderwidth=0, width=10, height=1, anchor='w')
     ad_label_matk.place(x=450, y=175)
 
     ad_text_matk = Text(ad_root_password, borderwidth=2, relief=RAISED, width=64, height=1)
     ad_text_matk.place(x=647, y=173)
 
-    ad_label_mkc = Label(ad_root_password, text="Mật khẩu cũ", fg="#4682B4", font=("Arial", 12, "bold"),
+    ad_label_mkc = Label(ad_root_password, text="Mật khẩu cũ", fg="#34495E", font=("Arial", 12, "bold"),
                          borderwidth=0, width=10, height=1, anchor='w')
     ad_label_mkc.place(x=450, y=235)
 
     ad_text_mkc = Text(ad_root_password, borderwidth=2, relief=RAISED, width=64, height=1)
     ad_text_mkc.place(x=647, y=233)
 
-    ad_label_mkm = Label(ad_root_password, text="Mật khẩu mới", fg="#4682B4", font=("Arial", 12, "bold"),
+    ad_label_mkm = Label(ad_root_password, text="Mật khẩu mới", fg="#34495E", font=("Arial", 12, "bold"),
                          borderwidth=0, width=10, height=1, anchor='w')
     ad_label_mkm.place(x=450, y=295)
 
     ad_text_mkm = Text(ad_root_password, borderwidth=2, relief=RAISED, width=64, height=1)
     ad_text_mkm.place(x=647, y=293)
 
-    ad_label_nlmkm = Label(ad_root_password, text="Nhập lại mật khẩu mới", fg="#4682B4", font=("Arial", 12, "bold"),
+    ad_label_nlmkm = Label(ad_root_password, text="Nhập lại mật khẩu mới", fg="#34495E", font=("Arial", 12, "bold"),
                            borderwidth=0, width=17, height=1, anchor='w')
     ad_label_nlmkm.place(x=450, y=355)
 
     ad_text_nlmkm = Text(ad_root_password, borderwidth=2, relief=RAISED, width=64, height=1)
     ad_text_nlmkm.place(x=648, y=353)
 
-    ad_button_gmk = Button(ad_root_password, text="Gửi", fg="#4682B4", font=("Arial", 10, "bold"),
+    ad_button_gmk = Button(ad_root_password, text="Gửi", fg="#34495E", font=("Arial", 10, "bold"),
                            borderwidth=2, relief=RAISED, width=6, height=1, anchor=CENTER, bg="white")
 
     ad_button_gmk.place(x=1107, y=415)
