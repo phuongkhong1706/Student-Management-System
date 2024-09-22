@@ -7,7 +7,7 @@ import AD_Home
 def ad_createaccount():
     ad_root_createaccount = Tk()
     ad_root_createaccount.title("Cấp tài khoản")
-    ad_root_createaccount.state("zoom")
+    ad_root_createaccount.state("zoomed")
 
     # Tạo canvas và scrollbar
     canvas = Canvas(ad_root_createaccount, borderwidth=0)
@@ -55,7 +55,7 @@ def ad_createaccount():
     image_hethong = create_image("./icon/system.png", 45, 45)
     image_bt = create_image("./icon/system.png", 45, 45)
 
-    label_hp = Label(frame_hp, height=150, image=image_hp, anchor=CENTER,
+    label_hp = Label(frame_hp, width=290, height=150, image=image_hp, anchor=CENTER,
                      borderwidth=0, bg="#34495E")
     label_hp.pack()
 
@@ -79,6 +79,7 @@ def ad_createaccount():
         ad_root_createaccount.destroy()
         AD_Home.ad_home()
 
+    #điều chỉnh button
     ad_button_home = Button(frame_hp, text="    Trang chủ", font=("Arial", 14, "bold"),
                             fg="white", bg="#34495E", borderwidth=0, compound="left",
                             image=image_home, width=290, height=50, anchor="w", padx=10, command=select_homepage)
@@ -153,7 +154,7 @@ def ad_createaccount():
 
     ad_label = Label(ad_root_createaccount, text="   Cấp tài khoản", fg="#34495E", font=("Arial", 16, "bold"),
                      borderwidth=0, relief=RAISED, width=81, height=2, anchor='w', bg="#DEE3EB")
-    ad_label.place(x=290, y=0)
+    ad_label.place(x=292, y=0)
 
     ad_label_matk = Label(ad_root_createaccount, text="Mã tài khoản", fg="#34495E", font=("Arial", 12, "bold"),
                           borderwidth=0, width=10, height=1, anchor='w')

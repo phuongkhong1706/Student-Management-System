@@ -8,7 +8,7 @@ import AD_Home
 def ad_password():
     ad_root_password = Tk()
     ad_root_password.title("Đổi mật khẩu")
-    ad_root_password.state("zoom")
+    ad_root_password.state("zoomed")
 
     # Tạo canvas và scrollbar
     canvas = Canvas(ad_root_password, borderwidth=0)
@@ -16,7 +16,7 @@ def ad_password():
     canvas.configure(yscrollcommand=scrollbar.set)
 
     # Tạo một frame bên trong canvas với kích thước cố định
-    frame_hp = Frame(canvas, width=290, height=1000, borderwidth=3, bg="#4682B4")
+    frame_hp = Frame(canvas, width=290, height=1000, borderwidth=0, bg="#34495E")
     canvas.create_window((0, 0), window=frame_hp, anchor='nw')
 
     # Đặt canvas và scrollbar vào cửa sổ chính
@@ -44,11 +44,20 @@ def ad_password():
 
         return photo
 
-    image_hp = create_image("./icon/system.png", 90, 90)
-    image_bt = create_image("./icon/system.png", 50, 50)
+    image_hp = create_image("./icon/icons8-scaler-academy-144.png",
+                            120, 120)
+    image_home = create_image("./icon/home.png", 45, 45)
+    image_tk = create_image("./icon/user.png", 45, 45)
+    image_kqht = create_image("./icon/kqht.png", 45, 45)
+    image_hdnk = create_image("./icon/extraact.png", 45, 45)
+    image_kehoach = create_image("./icon/learning.png", 45, 45)
+    image_hocphi = create_image("./icon/tuitionfee.png", 45, 45)
+    image_logout = create_image("./icon/logout.png", 45, 45)
+    image_hethong = create_image("./icon/system.png", 45, 45)
+    image_bt = create_image("./icon/system.png", 45, 45)
 
-    label_hp = Label(frame_hp, width=200, height=150, image=image_hp, anchor=CENTER,
-                     borderwidth=0, bg="#4682B4")
+    label_hp = Label(frame_hp, width=290, height=150, image=image_hp, anchor=CENTER,
+                     borderwidth=0, bg="#34495E")
     label_hp.pack()
 
     def atv_ad_button_tk():
@@ -61,10 +70,10 @@ def ad_password():
         ad_button_dx.pack_forget()
         ad_label_none.pack_forget()
 
-        ad_button_tk_tttk.pack(anchor='w', padx=10, pady=5)
-        ad_button_tk_dmk.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht.pack(anchor='w', padx=10, pady=5)
-        ad_button_dx.pack(anchor='w', padx=10, pady=5)
+        ad_button_tk_tttk.pack(anchor='w', padx=0, pady=5)
+        ad_button_tk_dmk.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht.pack(anchor='w', padx=0, pady=5)
+        ad_button_dx.pack(anchor='w', padx=0, pady=5)
         ad_label_none.pack()
 
     def select_homepage():
@@ -72,24 +81,25 @@ def ad_password():
         AD_Home.ad_home()
 
     ad_button_home = Button(frame_hp, text="    Trang chủ", font=("Arial", 14, "bold"),
-                            fg="white", bg="#4682B4", borderwidth=0, compound="left", image=image_bt,
-                            command=select_homepage)
-    ad_button_home.pack(anchor='w', padx=10, pady=5)
+                            fg="white", bg="#34495E", borderwidth=0, compound="left",
+                            image=image_home, width=290, height=50, anchor="w", padx=10, command=select_homepage)
+    ad_button_home.pack(anchor='w', padx=0, pady=5)
 
     ad_button_tk = Button(frame_hp, text="    Tài khoản", font=("Arial", 14, "bold"),
-                          fg="white", bg="#4682B4", borderwidth=0, compound="left", image=image_bt,
+                          fg="white", bg="#34495E", borderwidth=0, compound="left",
+                          image=image_tk, width=290, height=50, anchor="w", padx=10,
                           command=atv_ad_button_tk)
-    ad_button_tk.pack(anchor='w', padx=10, pady=5)
+    ad_button_tk.pack(anchor='w', padx=0, pady=5)
 
     ad_button_tk_tttk = Button(frame_hp, text="    Thông tin tài khoản", font=("Arial", 14, "bold"),
-                               fg="white", bg="#4682B4", borderwidth=0, compound="left",
-                               image=image_bt)
-    ad_button_tk_tttk.pack(anchor='w', padx=10, pady=5)
+                               fg="white", bg="#34495E", borderwidth=0, compound="left",
+                               width=290, height=1, anchor="w", padx=64)
+    ad_button_tk_tttk.pack(anchor='w', padx=0, pady=5)
 
     ad_button_tk_dmk = Button(frame_hp, text="    Đổi mật khẩu", font=("Arial", 14, "bold"),
-                              fg="#4682b4", bg="white", borderwidth=0, compound="left",
-                              image=image_bt)
-    ad_button_tk_dmk.pack(anchor='w', padx=10, pady=5)
+                              fg="#34495E", bg="white", borderwidth=0, compound="left",
+                              width=290, height=1, anchor="w", padx=64)
+    ad_button_tk_dmk.pack(anchor='w', padx=0, pady=5)
 
     def atv_ad_button_ht():
         ad_button_tk_tttk.pack_forget()
@@ -97,44 +107,50 @@ def ad_password():
         ad_button_dx.pack_forget()
         ad_label_none.pack_forget()
 
-        ad_button_ht_ctk.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht_xtk.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht_clmk.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht_xlshd.pack(anchor='w', padx=10, pady=5)
-        ad_button_ht_pq.pack(anchor='w', padx=10, pady=5)
+        ad_button_ht_ctk.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht_xtk.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht_clmk.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht_xlshd.pack(anchor='w', padx=0, pady=5)
+        ad_button_ht_pq.pack(anchor='w', padx=0, pady=5)
 
-        ad_button_dx.pack(anchor='w', padx=10, pady=5)
+        ad_button_dx.pack(anchor='w', padx=0, pady=5)
         ad_label_none.pack()
 
     ad_button_ht = Button(frame_hp, text="    Hệ thống", font=("Arial", 14, "bold"),
-                          fg="white", bg="#4682B4", borderwidth=0, compound="left", image=image_bt,
-                          command=atv_ad_button_ht)
-    ad_button_ht.pack(anchor='w', padx=10, pady=5)
+                          fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_hethong,
+                          width=290, height=50, anchor="w", padx=10, command=atv_ad_button_ht)
+    ad_button_ht.pack(anchor='w', padx=0, pady=5)
 
     ad_button_ht_ctk = Button(frame_hp, text="    Cấp tài khoản", font=("Arial", 14, "bold"),
-                              fg="white", bg="#4682B4", borderwidth=0, compound="left", image=image_bt)
+                              fg="white", bg="#34495E", borderwidth=0, compound="left",
+                              width=290, height=1, anchor="w", padx=64)
 
     ad_button_ht_xtk = Button(frame_hp, text="    Xóa tài khoản", font=("Arial", 14, "bold"),
-                              fg="white", bg="#4682B4", borderwidth=0, compound="left", image=image_bt)
+                              fg="white", bg="#34495E", borderwidth=0, compound="left",
+                              width=290, height=1, anchor="w", padx=64)
 
     ad_button_ht_clmk = Button(frame_hp, text="    Cấp lại mật khẩu", font=("Arial", 14, "bold"),
-                               fg="white", bg="#4682B4", borderwidth=0, compound="left", image=image_bt)
+                               fg="white", bg="#34495E", borderwidth=0, compound="left",
+                               width=290, height=1, anchor="w", padx=64)
 
     ad_button_ht_xlshd = Button(frame_hp, text="    Lịch sử hoạt động", font=("Arial", 14, "bold"),
-                                fg="white", bg="#4682B4", borderwidth=0, compound="left", image=image_bt)
+                                fg="white", bg="#34495E", borderwidth=0, compound="left",
+                                width=290, height=1, anchor="w", padx=64)
 
     ad_button_ht_pq = Button(frame_hp, text="    Phân quyền", font=("Arial", 14, "bold"),
-                             fg="white", bg="#4682B4", borderwidth=0, compound="left", image=image_bt)
+                             fg="white", bg="#34495E", borderwidth=0, compound="left",
+                             width=290, height=1, anchor="w", padx=64)
 
     ad_button_dx = Button(frame_hp, text="    Đăng xuất", font=("Arial", 14, "bold"),
-                          fg="white", bg="#4682B4", borderwidth=0, compound="left", image=image_bt)
-    ad_button_dx.pack(anchor='w', padx=10, pady=5)
+                          fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_logout,
+                          width=290, height=50, anchor="w", padx=10)
+    ad_button_dx.pack(anchor='w', padx=0, pady=5)
 
     ad_label_none = Label(frame_hp, bg="#4682B4", borderwidth=0, height=1000)
     ad_label_none.pack()
 
-    ad_label = Label(ad_root_password, text="   Đổi mật khẩu", fg="white", font=("Arial", 16, "bold"),
-                     borderwidth=2, relief=RAISED, width=81, height=2, anchor='w', bg="#4682B4")
+    ad_label = Label(ad_root_password, text="   Đổi mật khẩu", fg="#34495E", font=("Arial", 16, "bold"),
+                     borderwidth=0, relief=RAISED, width=81, height=2, anchor='w', bg="#DEE3EB")
     ad_label.place(x=292, y=0)
 
     ad_label_matk = Label(ad_root_password, text="Mã tài khoản", fg="#4682B4", font=("Arial", 12, "bold"),
