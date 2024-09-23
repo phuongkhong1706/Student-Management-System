@@ -52,7 +52,7 @@ def ad_home():
     image_hocphi = create_image("./icon/tuitionfee.png", 45, 45)
     image_logout = create_image("./icon/logout.png", 45, 45)
     image_hethong = create_image("./icon/system.png", 45, 45)
-    # image_meoquan = create_image("./icon/meoquan.jpg", 100, 100)
+    image_meoquan = create_image("./icon/meoqan.jpg", 200, 200)
 
     label_hp = Label(frame_hp, height=150, image=image_hp, anchor=CENTER,
                      borderwidth=0, bg="#34495E")
@@ -162,7 +162,7 @@ def ad_home():
                              borderwidth=0, relief=RAISED, width=81, height=30, anchor=CENTER)
     ad_label_content.place(x=290, y=50)
 
-    ad_image = Label(ad_root_homepage)
+    ad_image = Label(ad_root_homepage, image=image_meoquan)
     ad_image.place(x=720, y=150)
 
     ad_root_homepage.mainloop()
