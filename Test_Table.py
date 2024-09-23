@@ -1,46 +1,33 @@
 import tkinter as tk
-from tkinter import ttk
 
+def draw_table(canvas, data, row_height, col_width):
+    for i, row in enumerate(data):
+        for j, item in enumerate(row):
+            x0 = j * col_width
+            y0 = i * row_height
+            x1 = x0 + col_width
+            y1 = y0 + row_height
 
-# Hàm tạo giao diện và hiển thị bảng
-def create_table():
-    # Tạo cửa sổ tkinter
-    root = tk.Tk()
-    root.title("Giao diện Bảng")
+            # Vẽ ô
+            canvas.create_rectangle(x0, y0, x1, y1, outline='black')
+            # Vẽ dữ liệu trong ô
+            canvas.create_text((x0 + x1) / 2, (y0 + y1) / 2, text=item)
 
-    # Tạo widget Treeview
-    tree = ttk.Treeview(root, columns=("ID", "Tên", "Tuổi", "Thành phố"), show="headings")
+root = tk.Tk()
+root.title("Bảng với viền giữa các ô")
 
-    # Đặt tên tiêu đề cho các cột
-    tree.heading("ID", text="ID")
-    tree.heading("Tên", text="Tên")
-    tree.heading("Tuổi", text="Tuổi")
-    tree.heading("Thành phố", text="Thành phố")
+# Tạo Canvas để vẽ bảng
+canvas = tk.Canvas(root, width=300, height=200)
+canvas.pack()
 
-    # Định kích thước cho các cột
-    tree.column("ID", width=50)
-    tree.column("Tên", width=100)
-    tree.column("Tuổi", width=50)
-    tree.column("Thành phố", width=100)
+# Dữ liệu mẫu
+data = [
+    [1, 'Nguyễn Văn A', 28],
+    [2, 'Trần Thị B', 22],
+    [3, 'Phạm Văn C', 25],
+]
 
-    # Dữ liệu mẫu
-    sample_data = [
-        (1, "Nguyễn Văn A", 25, "Hà Nội"),
-        (2, "Trần Thị B", 30, "Đà Nẵng"),
-        (3, "Lê Văn C", 22, "Hồ Chí Minh"),
-        (4, "Phạm Thị D", 28, "Cần Thơ"),
-    ]
+# Vẽ bảng với viền giữa các ô
+draw_table(canvas, data, row_height=50, col_width=100)
 
-    # Thêm dữ liệu vào Treeview
-    for row in sample_data:
-        tree.insert("", "end", values=row)
-
-    # Đặt Treeview vào cửa sổ
-    tree.pack(expand=True, fill="both")
-
-    # Chạy giao diện
-    root.mainloop()
-
-
-# Gọi hàm tạo bảng
-create_table()
+root.mainloop()

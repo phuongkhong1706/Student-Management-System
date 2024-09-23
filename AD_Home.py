@@ -1,8 +1,12 @@
 from tkinter import *
 from PIL import Image, ImageTk
+
+import AD_DeleteAccount
+import AD_History
 import AD_InforAccount
 import AD_PassWord
 import AD_CreateAccount
+import AD_ResetPassword
 
 
 def ad_home():
@@ -129,17 +133,28 @@ def ad_home():
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
                               width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_ctk)
 
+    def select_ad_button_ht_xtk():
+        ad_root_homepage.destroy()
+        AD_DeleteAccount.ad_deleteaccount()
+
     ad_button_ht_xtk = Button(frame_hp, text="    Xóa tài khoản", font=("Arial", 14, "bold"),
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
-                              width=290, height=1, anchor="w", padx=64)
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_xtk)
+
+    def select_ad_button_ht_clmk():
+        ad_root_homepage.destroy()
+        AD_ResetPassword.ad_resetpassword()
 
     ad_button_ht_clmk = Button(frame_hp, text="    Cấp lại mật khẩu", font=("Arial", 14, "bold"),
                                fg="white", bg="#34495E", borderwidth=0, compound="left",
-                               width=290, height=1, anchor="w", padx=64)
+                               width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_clmk)
+    def select_ad_button_history():
+        ad_root_homepage.destroy()
+        AD_History.ad_history()
 
     ad_button_ht_xlshd = Button(frame_hp, text="    Lịch sử hoạt động", font=("Arial", 14, "bold"),
                                 fg="white", bg="#34495E", borderwidth=0, compound="left",
-                                width=290, height=1, anchor="w", padx=64)
+                                width=290, height=1, anchor="w", padx=64, command=select_ad_button_history)
 
     ad_button_ht_pq = Button(frame_hp, text="    Phân quyền", font=("Arial", 14, "bold"),
                              fg="white", bg="#34495E", borderwidth=0, compound="left",
