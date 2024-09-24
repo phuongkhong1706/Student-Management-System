@@ -2,6 +2,11 @@
 <project version="4">
   <component name="Black">
 <<<<<<< HEAD
+    <option name="sdkName" value="Python 3.12 (Student_Management)" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (Student_Management)" project-jdk-type="Python SDK" />
+=======
+<<<<<<< HEAD
     <option name="sdkName" value="Python 3.12 (StuManagement)" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12" project-jdk-type="Python SDK" />
@@ -10,4 +15,5 @@
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (Student_Management)" project-jdk-type="Python SDK" />
 >>>>>>> Lần commit đầu tiên
+>>>>>>> e3f1071ed962899e59daa0176f2627c0b0e82273
 </project>

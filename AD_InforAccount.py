@@ -3,7 +3,13 @@ from tkinter import *
 from PIL import Image, ImageTk
 from tkcalendar import DateEntry
 
+import AD_AccessControl
+import AD_CreateAccount
+import AD_DeleteAccount
+import AD_History
 import AD_Home
+import AD_PassWord
+import AD_ResetPassword
 
 
 def ad_inforaccount():
@@ -97,10 +103,14 @@ def ad_inforaccount():
                                width=290, height=1, anchor="w", padx=64)
     ad_button_tk_tttk.pack(anchor='w', padx=0, pady=5)
 
+    def select_ad_button_tk_dmk():
+        ad_root_inforaccount.destroy()
+        AD_PassWord.ad_password()
+
     ad_button_tk_dmk = Button(frame_hp, text="    Đổi mật khẩu", font=("Arial", 14, "bold"),
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
-                              width=290, height=1, anchor="w", padx=64)
-    ad_button_tk_tttk.pack(anchor='w', padx=0, pady=5)
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_tk_dmk)
+    ad_button_tk_dmk.pack(anchor='w', padx=0, pady=5)
 
     def atv_ad_button_ht():
         ad_button_tk_tttk.pack_forget()
@@ -122,25 +132,44 @@ def ad_inforaccount():
                           width=290, height=50, anchor="w", padx=10, command=atv_ad_button_ht)
     ad_button_ht.pack(anchor='w', padx=0, pady=5)
 
+    def select_ad_button_ht_ctk():
+        ad_root_inforaccount.destroy()
+        AD_CreateAccount.ad_createaccount()
+
     ad_button_ht_ctk = Button(frame_hp, text="    Cấp tài khoản", font=("Arial", 14, "bold"),
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
-                              width=290, height=1, anchor="w", padx=64)
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_ctk)
+
+    def select_ad_button_ht_xtk():
+        ad_root_inforaccount.destroy()
+        AD_DeleteAccount.ad_deleteaccount()
 
     ad_button_ht_xtk = Button(frame_hp, text="    Xóa tài khoản", font=("Arial", 14, "bold"),
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
-                              width=290, height=1, anchor="w", padx=64)
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_xtk)
+
+    def select_ad_button_ht_clmk():
+        ad_root_inforaccount.destroy()
+        AD_ResetPassword.ad_resetpassword()
 
     ad_button_ht_clmk = Button(frame_hp, text="    Cấp lại mật khẩu", font=("Arial", 14, "bold"),
                                fg="white", bg="#34495E", borderwidth=0, compound="left",
-                               width=290, height=1, anchor="w", padx=64)
+                               width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_clmk)
+    def select_ad_button_history():
+        ad_root_inforaccount.destroy()
+        AD_History.ad_history()
 
     ad_button_ht_xlshd = Button(frame_hp, text="    Lịch sử hoạt động", font=("Arial", 14, "bold"),
                                 fg="white", bg="#34495E", borderwidth=0, compound="left",
-                                width=290, height=1, anchor="w", padx=64)
+                                width=290, height=1, anchor="w", padx=64, command=select_ad_button_history)
+
+    def select_ad_access_control():
+        ad_root_inforaccount.destroy()
+        AD_AccessControl.ad_accesscontrol()
 
     ad_button_ht_pq = Button(frame_hp, text="    Phân quyền", font=("Arial", 14, "bold"),
                              fg="white", bg="#34495E", borderwidth=0, compound="left",
-                             width=290, height=1, anchor="w", padx=64)
+                             width=290, height=1, anchor="w", padx=64, command=select_ad_access_control)
 
     ad_button_dx = Button(frame_hp, text="    Đăng xuất", font=("Arial", 14, "bold"),
                           fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_logout,

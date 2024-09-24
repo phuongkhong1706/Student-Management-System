@@ -5,7 +5,7 @@ import AD_Home
 
 def run_program():
     user_input = text_tentk.get("1.0", "end-1c")
-    if user_input == "A":
+    if user_input == "":
         root_login.destroy()
         AD_Home.ad_home()
     elif user_input == "2":

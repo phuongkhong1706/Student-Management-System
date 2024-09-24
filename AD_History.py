@@ -6,22 +6,22 @@ from tkinter.ttk import Combobox
 from tkinter import ttk
 
 import AD_AccessControl
+import AD_CreateAccount
 import AD_DeleteAccount
-import AD_History
 import AD_Home
 import AD_InforAccount
 import AD_PassWord
 import AD_ResetPassword
 
 
-def ad_createaccount():
-    ad_root_createaccount = Tk()
-    ad_root_createaccount.title("Cấp tài khoản")
-    ad_root_createaccount.state("zoomed")
+def ad_history():
+    ad_root_history = Tk()
+    ad_root_history.title("Lịch sử hoạt động")
+    ad_root_history.state("zoomed")
 
     # Tạo canvas và scrollbar
-    canvas = Canvas(ad_root_createaccount, borderwidth=0)
-    scrollbar = Scrollbar(ad_root_createaccount, orient=VERTICAL, command=canvas.yview)
+    canvas = Canvas(ad_root_history, borderwidth=0)
+    scrollbar = Scrollbar(ad_root_history, orient=VERTICAL, command=canvas.yview)
     canvas.configure(yscrollcommand=scrollbar.set)
 
     # Tạo một frame bên trong canvas với kích thước cố định
@@ -86,9 +86,10 @@ def ad_createaccount():
         ad_label_none.pack()
 
     def select_homepage():
-        ad_root_createaccount.destroy()
+        ad_root_history.destroy()
         AD_Home.ad_home()
 
+    # điều chỉnh button
     ad_button_home = Button(frame_hp, text="    Trang chủ", font=("Arial", 14, "bold"),
                             fg="white", bg="#34495E", borderwidth=0, compound="left",
                             image=image_home, width=290, height=50, anchor="w", padx=10, command=select_homepage)
@@ -101,7 +102,7 @@ def ad_createaccount():
     ad_button_tk.pack(anchor='w', padx=0, pady=5)
 
     def select_ad_button_tk_tttk():
-        ad_root_createaccount.destroy()
+        ad_root_history.destroy()
         AD_InforAccount.ad_inforaccount()
 
     ad_button_tk_tttk = Button(frame_hp, text="    Thông tin tài khoản", font=("Arial", 14, "bold"),
@@ -109,7 +110,7 @@ def ad_createaccount():
                                width=290, height=1, anchor="w", padx=64, command=select_ad_button_tk_tttk)
 
     def select_ad_button_tk_dmk():
-        ad_root_createaccount.destroy()
+        ad_root_history.destroy()
         AD_PassWord.ad_password()
 
     ad_button_tk_dmk = Button(frame_hp, text="    Đổi mật khẩu", font=("Arial", 14, "bold"),
@@ -136,13 +137,17 @@ def ad_createaccount():
                           width=290, height=50, anchor="w", padx=10, command=atv_ad_button_ht)
     ad_button_ht.pack(anchor='w', padx=0, pady=5)
 
-    ad_button_ht_ctk = Button(frame_hp, text="    Cấp tài khoản", font=("Arial", 14, "bold"),
-                              fg="#34495E", bg="white", borderwidth=0, compound="left",
-                              width=290, height=1, anchor="w", padx=64)
+    def select_ad_button_ht_ctk():
+        ad_root_history.destroy()
+        AD_CreateAccount.ad_createaccount()
+
+    ad_button_ht_ctk = Button(frame_hp, text="    Lịch sử hoạt động", font=("Arial", 14, "bold"),
+                              fg="white", bg="#34495E", borderwidth=0, compound="left",
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_ctk)
     ad_button_ht_ctk.pack(anchor='w', padx=0, pady=5)
 
     def select_ad_button_ht_xtk():
-        ad_root_createaccount.destroy()
+        ad_root_history.destroy()
         AD_DeleteAccount.ad_deleteaccount()
 
     ad_button_ht_xtk = Button(frame_hp, text="    Xóa tài khoản", font=("Arial", 14, "bold"),
@@ -151,25 +156,20 @@ def ad_createaccount():
     ad_button_ht_xtk.pack(anchor='w', padx=0, pady=5)
 
     def select_ad_button_ht_clmk():
-        ad_root_createaccount.destroy()
+        ad_root_history.destroy()
         AD_ResetPassword.ad_resetpassword()
 
     ad_button_ht_clmk = Button(frame_hp, text="    Cấp lại mật khẩu", font=("Arial", 14, "bold"),
                                fg="white", bg="#34495E", borderwidth=0, compound="left",
                                width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_clmk)
     ad_button_ht_clmk.pack(anchor='w', padx=0, pady=5)
-
-    def select_ad_button_history():
-        ad_root_createaccount.destroy()
-        AD_History.ad_history()
-
     ad_button_ht_xlshd = Button(frame_hp, text="    Lịch sử hoạt động", font=("Arial", 14, "bold"),
-                                fg="white", bg="#34495E", borderwidth=0, compound="left",
-                                width=290, height=1, anchor="w", padx=64, command=select_ad_button_history)
+                                fg="#34495E", bg="white", borderwidth=0, compound="left",
+                                width=290, height=1, anchor="w", padx=64)
     ad_button_ht_xlshd.pack(anchor='w', padx=0, pady=5)
 
     def select_ad_access_control():
-        ad_root_createaccount.destroy()
+        ad_root_history.destroy()
         AD_AccessControl.ad_accesscontrol()
 
     ad_button_ht_pq = Button(frame_hp, text="    Phân quyền", font=("Arial", 14, "bold"),
@@ -184,32 +184,32 @@ def ad_createaccount():
     ad_label_none = Label(frame_hp, bg="#34495E", borderwidth=0, height=1000)
     ad_label_none.pack()
 
-    ad_label = Label(ad_root_createaccount, text="   Cấp tài khoản", fg="#34495E", font=("Arial", 16, "bold"),
+    ad_label = Label(ad_root_history, text="   Cấp tài khoản", fg="#34495E", font=("Arial", 16, "bold"),
                      borderwidth=0, relief=RAISED, width=81, height=2, anchor='w', bg="#DEE3EB")
     ad_label.place(x=292, y=0)
 
-    ad_label_find = Label(ad_root_createaccount, text="Tra cứu", font=("Arial", 14, "bold"),
+    ad_label_find = Label(ad_root_history, text="Tra cứu", font=("Arial", 14, "bold"),
                           fg="black", borderwidth=0)
     ad_label_find.place(x=310, y=80)
 
-    ad_frame_find = Frame(ad_root_createaccount, width=1015, height=200, borderwidth=2, relief=RAISED)
+    ad_frame_find = Frame(ad_root_history, width=1015, height=200, borderwidth=2, relief=RAISED)
     ad_frame_find.place(x=310, y=110)
 
-    ad_label_find_date = Label(ad_root_createaccount, text="Ngày: ", font=("Arial", 12, "bold"),
+    ad_label_find_date = Label(ad_root_history, text="Ngày: ", font=("Arial", 12, "bold"),
                                fg="black", borderwidth=0)
     ad_label_find_date.place(x=350, y=140)
 
-    ad_text_find_date = DateEntry(ad_root_createaccount, width=20, height=2)
+    ad_text_find_date = DateEntry(ad_root_history, width=20, height=2)
     ad_text_find_date.place(x=520, y=140)
 
-    ad_label_find_moment = Label(ad_root_createaccount, text="Thời điểm: ", font=("Arial", 12, "bold"),
+    ad_label_find_moment = Label(ad_root_history, text="Thời điểm: ", font=("Arial", 12, "bold"),
                                  fg="black", borderwidth=0)
     ad_label_find_moment.place(x=850, y=140)
 
     # Tạo Spinbox cho giờ, phút, giây
-    hour_spinbox = Spinbox(ad_root_createaccount, from_=0, to=23, wrap=True, width=2, format="%02.0f")
-    minute_spinbox = Spinbox(ad_root_createaccount, from_=0, to=59, wrap=True, width=2, format="%02.0f")
-    second_spinbox = Spinbox(ad_root_createaccount, from_=0, to=59, wrap=True, width=2, format="%02.0f")
+    hour_spinbox = Spinbox(ad_root_history, from_=0, to=23, wrap=True, width=2, format="%02.0f")
+    minute_spinbox = Spinbox(ad_root_history, from_=0, to=59, wrap=True, width=2, format="%02.0f")
+    second_spinbox = Spinbox(ad_root_history, from_=0, to=59, wrap=True, width=2, format="%02.0f")
 
     # Đặt vị trí các Spinbox
     hour_spinbox.place(x=1000, y=140)
@@ -217,31 +217,31 @@ def ad_createaccount():
     second_spinbox.place(x=1170, y=140)
 
     # Thêm nhãn chỉ dẫn (hh:mm:ss)
-    Label(ad_root_createaccount, text="Giờ", font=("Arial", 11, "bold")).place(x=1030, y=137)
-    Label(ad_root_createaccount, text="Phút", font=("Arial", 11, "bold")).place(x=1110, y=137)
-    Label(ad_root_createaccount, text="Giây", font=("Arial", 11, "bold")).place(x=1200, y=137)
+    Label(ad_root_history, text="Giờ", font=("Arial", 11, "bold")).place(x=1030, y=137)
+    Label(ad_root_history, text="Phút", font=("Arial", 11, "bold")).place(x=1110, y=137)
+    Label(ad_root_history, text="Giây", font=("Arial", 11, "bold")).place(x=1200, y=137)
 
-    ad_label_user = Label(ad_root_createaccount, text="Đối tượng sử dụng: ", font=("Arial", 12, "bold"),
+    ad_label_user = Label(ad_root_history, text="Đối tượng sử dụng: ", font=("Arial", 12, "bold"),
                           fg="black", borderwidth=0)
     ad_label_user.place(x=350, y=230)
 
     # Tạo combo box đối tượng sử dụng
     ad_combobox_find_user_options = ["Quản trị viên", "Cán bộ phòng đào tạo",
                                      "Cán bộ phòng CTSV", "Sinh viên", "Giảng viên"]
-    ad_combobox_find_user = Combobox(ad_root_createaccount,
+    ad_combobox_find_user = Combobox(ad_root_history,
                                      values=ad_combobox_find_user_options, width=20, state="readonly")
     ad_combobox_find_user.set("Quản trị viên")
 
     ad_combobox_find_user.place(x=520, y=230)
 
-    ad_label_find_student = Label(ad_root_createaccount, text="MSSV / Họ và tên: ", font=("Arial", 12, "bold"),
+    ad_label_find_student = Label(ad_root_history, text="MSSV / Họ và tên: ", font=("Arial", 12, "bold"),
                                   fg="black", borderwidth=0)
     ad_label_find_student.place(x=850, y=230)
 
-    ad_text_find_student = Text(ad_root_createaccount, width=29, height=1)
+    ad_text_find_student = Text(ad_root_history, width=29, height=1)
     ad_text_find_student.place(x=1000, y=230)
 
-    ad_label_list_create = Label(ad_root_createaccount, text="Danh sách người dùng cần tạo tài khoản",
+    ad_label_list_create = Label(ad_root_history, text="Lịch sử hoạt động",
                                  font=("Arial", 14, "bold"),
                                  fg="black", borderwidth=0)
     ad_label_list_create.place(x=310, y=350)
@@ -263,34 +263,33 @@ def ad_createaccount():
     style.configure("Treeview", highlightthickness=0, bd=0, font=('Arial', 12))
     style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})])
 
-    def show_selected():
-        # Lấy danh sách các tài khoản đã chọn
-        selected_accounts = [data[i][1] for i in range(len(data)) if check_vars[i].get()]
-        print("Tài khoản đã chọn:", selected_accounts)
-
     # Tạo widget Treeview
-    tree = ttk.Treeview(ad_root_createaccount,
-                        columns=("Thời gian", "Đối tượng sử dụng", "Mã số", "Họ và tên", "Cấp tài khoản"),
+    tree = ttk.Treeview(ad_root_history,
+                        columns=("Thời gian", "Mã tài khoản", "Tên tài khoản", "Đối tượng sử dụng", "Hành động"),
                         show="headings")
 
     # Đặt tên tiêu đề cho các cột
     tree.heading("Thời gian", text="Thời gian")
+    tree.heading("Mã tài khoản", text="Mã tài khoản")
+    tree.heading("Tên tài khoản", text="Tên tài khoản")
     tree.heading("Đối tượng sử dụng", text="Đối tượng sử dụng")
-    tree.heading("Mã số", text="Mã số")
-    tree.heading("Họ và tên", text="Họ và tên")
-    tree.heading("Cấp tài khoản", text="Cấp tài khoản")
-    columns_width = 203
-    for col in ["Thời gian", "Đối tượng sử dụng", "Mã số", "Họ và tên", "Cấp tài khoản"]:
-        tree.column(col, anchor="center", width=columns_width)
+    tree.heading("Hành động", text="Hành động")
+
+    # Cấu hình các cột với anchor=CENTER để căn giữa
+    tree.column("Thời gian", anchor=CENTER, width=203)
+    tree.column("Mã tài khoản", anchor=CENTER, width=203)
+    tree.column("Tên tài khoản", anchor=CENTER, width=203)
+    tree.column("Đối tượng sử dụng", anchor=CENTER, width=203)
+    tree.column("Hành động", anchor=CENTER, width=203)
 
     # Dữ liệu mẫu
     data = [
-        ("08:00", "Nguyễn Văn A", "001", "Nguyễn Văn A"),
-        ("09:00", "Trần Thị B", "002", "Trần Thị B"),
-        ("10:00", "Lê Văn C", "003", "Lê Văn C"),
-        ("11:01", "Phạm Thị D", "004", "Phạm Thị D"),
-        ("11:01", "Phạm Thị D", "004", "Phạm Thị D"),
-        ("11:01", "Phạm Thị D", "004", "Phạm Thị D")
+        ("08:00", "Nguyễn Văn A", "001", "Nguyễn Văn A", "Đăng nhập"),
+        ("09:00", "Trần Thị B", "002", "Trần Thị B", "Đăng nhập"),
+        ("10:00", "Lê Văn C", "003", "Lê Văn C", "Đăng nhập"),
+        ("11:01", "Phạm Thị D", "004", "Phạm Thị D", "Đăng nhập"),
+        ("11:01", "Phạm Thị D", "004", "Phạm Thị D", "Đăng nhập"),
+        ("11:01", "Phạm Thị D", "004", "Phạm Thị D", "Đăng nhập")
     ]
 
     # Thêm dữ liệu vào Treeview
@@ -300,35 +299,4 @@ def ad_createaccount():
     # Đặt Treeview vào cửa sổ
     tree.place(x=310, y=400)
 
-    # Tạo biến cho các Checkbutton
-    check_vars = [BooleanVar() for _ in data]
-
-    # Thêm Checkbutton bên cạnh Treeview
-    for index in range(len(data)):
-        checkbutton = Checkbutton(ad_root_createaccount, variable=check_vars[index])
-        checkbutton.place(x=columns_width + 1000, y=430 + index * 25)  # Điều chỉnh vị trí để phù hợp với hàng
-
-    def select_all():
-        # Đánh dấu tất cả Checkbutton là True
-        for var in check_vars:
-            var.set(True)
-
-    def delete_all():
-        # Đánh dấu tất cả Checkbutton là True
-        for var in check_vars:
-            var.set(False)
-
-    ad_button_select_all = Button(ad_root_createaccount, text="Chọn tất cả", font=("Arial", 12, "bold"), fg="white",
-                                  bg="#34495E", command=select_all)
-    ad_button_select_all.place(x=1095, y=350)
-
-    ad_button_delete_all = Button(ad_root_createaccount, text="Bỏ chọn tất cả", font=("Arial", 12, "bold"), fg="white",
-                                  bg="#34495E", command=delete_all)
-    ad_button_delete_all.place(x=1200, y=350)
-
-    ad_button_delete_account = Button(ad_root_createaccount, text="Cấp tài khoản", font=("Arial", 12, "bold"),
-                                      fg="white",
-                                      bg="#34495E", command=show_selected)
-    ad_button_delete_account.place(x=1205, y=700)
-
-    ad_root_createaccount.mainloop()
+    ad_root_history.mainloop()

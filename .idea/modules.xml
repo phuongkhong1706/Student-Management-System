@@ -3,10 +3,14 @@
   <component name="ProjectModuleManager">
     <modules>
 <<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/.idea/Student_Management.iml" filepath="$PROJECT_DIR$/.idea/Student_Management.iml" />
+=======
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/StuManagement.iml" filepath="$PROJECT_DIR$/.idea/StuManagement.iml" />
 =======
       <module fileurl="file://$PROJECT_DIR$/.idea/Student_Management.iml" filepath="$PROJECT_DIR$/.idea/Student_Management.iml" />
 >>>>>>> Lần commit đầu tiên
+>>>>>>> e3f1071ed962899e59daa0176f2627c0b0e82273
     </modules>
   </component>
 </project>
