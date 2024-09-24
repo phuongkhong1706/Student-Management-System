@@ -4,12 +4,19 @@ from tkcalendar import DateEntry
 from PIL import Image, ImageTk
 from tkinter.ttk import Combobox
 from tkinter import ttk
+
+import AD_AccessControl
+import AD_CreateAccount
+import AD_DeleteAccount
+import AD_History
 import AD_Home
+import AD_InforAccount
+import AD_PassWord
 
 
 def ad_resetpassword():
     ad_root_resetpassword = Tk()
-    ad_root_resetpassword.title("Cấp tài khoản")
+    ad_root_resetpassword.title("Cấp lại mật khẩu")
     ad_root_resetpassword.state("zoomed")
 
     # Tạo canvas và scrollbar
@@ -28,14 +35,11 @@ def ad_resetpassword():
     # Ngăn frame điều chỉnh kích thước theo các widget bên trong
     frame_hp.pack_propagate(0)
 
-
     # Cập nhật kích thước canvas khi nội dung thay đổi
     def on_frame_configure(event):
         canvas.configure(scrollregion=canvas.bbox("all"))
 
-
     frame_hp.bind("<Configure>", on_frame_configure)
-
 
     def create_image(file_name, x, y):
         # Mở ảnh với Pillow
@@ -48,7 +52,6 @@ def ad_resetpassword():
         photo = ImageTk.PhotoImage(resized_image)
 
         return photo
-
 
     image_hp = create_image("./icon/icons8-scaler-academy-144.png",
                             120, 120)
@@ -66,7 +69,6 @@ def ad_resetpassword():
                      borderwidth=0, bg="#34495E")
     label_hp.pack()
 
-
     def atv_ad_button_tk():
         ad_button_ht.pack_forget()
         ad_button_ht_ctk.pack_forget()
@@ -83,11 +85,9 @@ def ad_resetpassword():
         ad_button_dx.pack(anchor='w', padx=0, pady=5)
         ad_label_none.pack()
 
-
     def select_homepage():
         ad_root_resetpassword.destroy()
         AD_Home.ad_home()
-
 
     # điều chỉnh button
     ad_button_home = Button(frame_hp, text="    Trang chủ", font=("Arial", 14, "bold"),
@@ -101,14 +101,21 @@ def ad_resetpassword():
                           command=atv_ad_button_tk)
     ad_button_tk.pack(anchor='w', padx=0, pady=5)
 
+    def select_ad_button_tk_tttk():
+        ad_root_resetpassword.destroy()
+        AD_InforAccount.ad_inforaccount()
+
     ad_button_tk_tttk = Button(frame_hp, text="    Thông tin tài khoản", font=("Arial", 14, "bold"),
                                fg="white", bg="#34495E", borderwidth=0, compound="left",
-                               width=290, height=1, anchor="w", padx=64)
+                               width=290, height=1, anchor="w", padx=64, command=select_ad_button_tk_tttk)
+
+    def select_ad_button_tk_dmk():
+        ad_root_resetpassword.destroy()
+        AD_PassWord.ad_password()
 
     ad_button_tk_dmk = Button(frame_hp, text="    Đổi mật khẩu", font=("Arial", 14, "bold"),
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
-                              width=290, height=1, anchor="w", padx=64)
-
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_tk_dmk)
 
     def atv_ad_button_ht():
         ad_button_tk_tttk.pack_forget()
@@ -125,37 +132,50 @@ def ad_resetpassword():
         ad_button_dx.pack(anchor='w', padx=0, pady=5)
         ad_label_none.pack()
 
-
     ad_button_ht = Button(frame_hp, text="    Hệ thống", font=("Arial", 14, "bold"),
                           fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_hethong,
                           width=290, height=50, anchor="w", padx=10, command=atv_ad_button_ht)
     ad_button_ht.pack(anchor='w', padx=0, pady=5)
 
+    def select_ad_button_ht_ctk():
+        ad_root_resetpassword.destroy()
+        AD_CreateAccount.ad_createaccount()
+
     ad_button_ht_ctk = Button(frame_hp, text="    Cấp tài khoản", font=("Arial", 14, "bold"),
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
-                              width=290, height=1, anchor="w", padx=64)
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_ctk)
     ad_button_ht_ctk.pack(anchor='w', padx=0, pady=5)
+
+    def select_ad_button_ht_xtk():
+        ad_root_resetpassword.destroy()
+        AD_DeleteAccount.ad_deleteaccount()
 
     ad_button_ht_xtk = Button(frame_hp, text="    Xóa tài khoản", font=("Arial", 14, "bold"),
                               fg="white", bg="#34495E", borderwidth=0, compound="left",
-                              width=290, height=1, anchor="w", padx=64)
+                              width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_xtk)
     ad_button_ht_xtk.pack(anchor='w', padx=0, pady=5)
-
     ad_button_ht_clmk = Button(frame_hp, text="    Cấp lại mật khẩu", font=("Arial", 14, "bold"),
                                fg="#34495E", bg="white", borderwidth=0, compound="left",
                                width=290, height=1, anchor="w", padx=64)
     ad_button_ht_clmk.pack(anchor='w', padx=0, pady=5)
 
+    def select_ad_button_history():
+        ad_root_resetpassword.destroy()
+        AD_History.ad_history()
+
     ad_button_ht_xlshd = Button(frame_hp, text="    Lịch sử hoạt động", font=("Arial", 14, "bold"),
                                 fg="white", bg="#34495E", borderwidth=0, compound="left",
-                                width=290, height=1, anchor="w", padx=64)
+                                width=290, height=1, anchor="w", padx=64, command=select_ad_button_history)
     ad_button_ht_xlshd.pack(anchor='w', padx=0, pady=5)
+
+    def select_ad_access_control():
+        ad_root_resetpassword.destroy()
+        AD_AccessControl.ad_accesscontrol()
 
     ad_button_ht_pq = Button(frame_hp, text="    Phân quyền", font=("Arial", 14, "bold"),
                              fg="white", bg="#34495E", borderwidth=0, compound="left",
-                             width=290, height=1, anchor="w", padx=64)
+                             width=290, height=1, anchor="w", padx=64, command=select_ad_access_control)
     ad_button_ht_pq.pack(anchor='w', padx=0, pady=5)
-
     ad_button_dx = Button(frame_hp, text="    Đăng xuất", font=("Arial", 14, "bold"),
                           fg="white", bg="#34495E", borderwidth=0, compound="left", image=image_logout,
                           width=290, height=50, anchor="w", padx=10)
@@ -221,7 +241,7 @@ def ad_resetpassword():
     ad_text_find_student = Text(ad_root_resetpassword, width=29, height=1)
     ad_text_find_student.place(x=1000, y=230)
 
-    ad_label_list_create = Label(ad_root_resetpassword, text="Danh sách người dùng cần tạo tài khoản",
+    ad_label_list_create = Label(ad_root_resetpassword, text="Danh sách người dùng cần cấp lại mật khẩu",
                                  font=("Arial", 14, "bold"),
                                  fg="black", borderwidth=0)
     ad_label_list_create.place(x=310, y=350)
@@ -243,16 +263,14 @@ def ad_resetpassword():
     style.configure("Treeview", highlightthickness=0, bd=0, font=('Arial', 12))
     style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})])
 
-
     def show_selected():
         # Lấy danh sách các tài khoản đã chọn
         selected_accounts = [data[i][1] for i in range(len(data)) if check_vars[i].get()]
         print("Tài khoản đã chọn:", selected_accounts)
 
-
     # Tạo widget Treeview
     tree = ttk.Treeview(ad_root_resetpassword,
-                        columns=("Thời gian", "Đối tượng sử dụng", "Mã số", "Họ và tên", "Cấp tài khoản"),
+                        columns=("Thời gian", "Đối tượng sử dụng", "Mã số", "Họ và tên", "Cấp lại mật khẩu"),
                         show="headings")
 
     # Đặt tên tiêu đề cho các cột
@@ -260,9 +278,9 @@ def ad_resetpassword():
     tree.heading("Đối tượng sử dụng", text="Đối tượng sử dụng")
     tree.heading("Mã số", text="Mã số")
     tree.heading("Họ và tên", text="Họ và tên")
-    tree.heading("Cấp tài khoản", text="Cấp tài khoản")
+    tree.heading("Cấp lại mật khẩu", text="Cấp lại mật khẩu")
     columns_width = 203
-    for col in ["Thời gian", "Đối tượng sử dụng", "Mã số", "Họ và tên", "Cấp tài khoản"]:
+    for col in ["Thời gian", "Đối tượng sử dụng", "Mã số", "Họ và tên", "Cấp lại mật khẩu"]:
         tree.column(col, anchor="center", width=columns_width)
 
     # Dữ liệu mẫu
@@ -288,20 +306,17 @@ def ad_resetpassword():
     # Thêm Checkbutton bên cạnh Treeview
     for index in range(len(data)):
         checkbutton = Checkbutton(ad_root_resetpassword, variable=check_vars[index])
-        checkbutton.place(x=columns_width + 1000, y=430 + index * 25)  # Điều chỉnh vị trí để phù hợp với hàng
-
+        checkbutton.place(x=columns_width + 1000, y=430 + index * 25)
 
     def select_all():
         # Đánh dấu tất cả Checkbutton là True
         for var in check_vars:
             var.set(True)
 
-
     def delete_all():
         # Đánh dấu tất cả Checkbutton là True
         for var in check_vars:
             var.set(False)
-
 
     ad_button_select_all = Button(ad_root_resetpassword, text="Chọn tất cả", font=("Arial", 12, "bold"), fg="white",
                                   bg="#34495E", command=select_all)
