@@ -1,15 +1,59 @@
+from datetime import datetime
+
 from tkinter import *
+from tkinter import messagebox
 
 import AD_Home
+import mysql
+import ConnectionToMySQL
+import History
+import User
 
 
 def run_program():
-    user_input = text_tentk.get("1.0", "end-1c")
-    if user_input == "":
-        root_login.destroy()
-        AD_Home.ad_home()
-    elif user_input == "2":
-        pass
+    User.user_input = text_tentk.get("1.0", "end-1c")  # Lấy tài khoản từ text_tentk
+    password_input = text_mk.get("1.0", "end-1c")  # Lấy mật khẩu từ text_mk
+
+    if User.user_input == "" or password_input == "":
+        root_login.destroy()  # Đóng cửa sổ đăng nhập
+        AD_Home.ad_home()  # Chuyển đến trang AD_Home
+        return  # Kết thúc hàm sau khi chuyển hướng
+        # messagebox.showerror("Lỗi", "Vui lòng nhập tài khoản và mật khẩu")
+
+    # Kiểm tra tài khoản có bắt đầu bằng "DT" không
+    if User.user_input.startswith("AD"):
+        History.save_user(User.user_input, "Đăng nhập")
+        root_login.destroy()  # Đóng cửa sổ đăng nhập
+        AD_Home.ad_home()  # Chuyển đến trang AD_Home
+        return  # Kết thúc hàm sau khi chuyển hướng
+
+    try:
+        # Kết nối tới MySQL
+        connection = ConnectionToMySQL.connection_to_mysql()
+
+        cursor = connection.cursor()
+
+        # Kiểm tra xem tài khoản và mật khẩu có tồn tại trong bảng list_account không
+        query = "SELECT * FROM list_account WHERE MaTK = %s AND MatKhau = %s"
+        cursor.execute(query, (User.user_input, password_input))
+
+        # Lấy kết quả từ truy vấn
+        account = cursor.fetchone()
+
+        if account:
+            # Nếu tìm thấy tài khoản và mật khẩu hợp lệ
+            root_login.destroy()  # Đóng cửa sổ đăng nhập
+            AD_Home.ad_home()  # Chuyển đến trang AD_Home
+        else:
+            # Nếu không tìm thấy tài khoản hoặc mật khẩu không đúng
+            messagebox.showerror("Lỗi", "Tài khoản hoặc mật khẩu không đúng")
+
+    except mysql.connector.Error as error:
+        messagebox.showerror("Lỗi", f"Không thể kết nối đến cơ sở dữ liệu: {error}")
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
 
 
 root_login = Tk()

@@ -15,6 +15,9 @@ import AD_Home
 import AD_InforAccount
 import AD_PassWord
 import AD_ResetPassword
+import ConnectionToMySQL
+import History
+import User
 
 data = []
 
@@ -254,13 +257,7 @@ def ad_createaccount():
     # Hàm kết nối đến MySQL và lấy dữ liệu từ bảng 'list_create'
     def fetch_data_from_mysql(query, params=None):
         try:
-            # Kết nối đến MySQL
-            connection = mysql.connector.connect(
-                host='localhost',
-                user='root',
-                password='dotrungquan183@',  # Đặt mật khẩu của bạn
-                database='student_management'  # Tên database
-            )
+            connection = ConnectionToMySQL.connection_to_mysql()
 
             # Tạo con trỏ và thực thi câu truy vấn
             cursor = connection.cursor()
@@ -277,6 +274,7 @@ def ad_createaccount():
         except mysql.connector.Error as error:
             print(f"Lỗi kết nối MySQL: {error}")
             return []
+
     # Hàm sinh mật khẩu ngẫu nhiên
     def generate_random_password(length=10):
         characters = string.digits  # Chỉ sử dụng chữ số
@@ -286,12 +284,7 @@ def ad_createaccount():
     def create_and_insert_accounts(selected_accounts):
         try:
             # Kết nối đến MySQL
-            connection = mysql.connector.connect(
-                host='localhost',
-                user='root',
-                password='dotrungquan183@',  # Đặt mật khẩu của bạn
-                database='student_management'  # Tên database
-            )
+            connection = ConnectionToMySQL.connection_to_mysql()
 
             cursor = connection.cursor()
 
@@ -360,11 +353,13 @@ def ad_createaccount():
         check = checked_char if checked_state[index] else unchecked_char
         tree.insert("", "end", values=(*row, check))  # Di chuyển checkbox xuống cuối
 
-    # Đặt Treeview vào cửa sổ với scrollbar
-    tree_scroll = Scrollbar(ad_root_createaccount, orient="vertical", command=tree.yview)
-    tree.configure(yscrollcommand=tree_scroll.set)
+    # Tạo thanh cuộn dọc
+    tree_scroll_vertical = Scrollbar(ad_root_createaccount, orient="vertical", command=tree.yview)
+    tree.configure(yscrollcommand=tree_scroll_vertical.set)
+
+    # Đặt vị trí Treeview và các thanh cuộn
     tree.place(x=310, y=400)
-    tree_scroll.place(x=1310, y=400, height=300)
+    tree_scroll_vertical.place(x=1310, y=400, height=300)
 
     # Hàm xử lý khi click vào Treeview
     def on_treeview_click(event):
@@ -429,6 +424,8 @@ def ad_createaccount():
 
         user_type = ad_combobox_find_user.get()  # Lấy đối tượng sử dụng từ Combobox
         student_info = ad_text_find_student.get("1.0", "end-1c").strip()  # Lấy MSSV/họ tên từ Text widget
+
+        History.save_user(User.user_input, f"Tra cứu {datetime_str}, \n{user_type}, {student_info}")
 
         query = """
                 SELECT MaSo, ThoiGian, DoiTuongSuDung, HoVaTen 

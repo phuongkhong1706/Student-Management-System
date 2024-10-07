@@ -8,6 +8,9 @@ import AD_PassWord
 import AD_CreateAccount
 import AD_ResetPassword
 import AD_AccessControl
+import History
+import User
+
 
 def ad_home():
     ad_root_homepage = Tk()
@@ -46,7 +49,7 @@ def ad_home():
 
         return photo
 
-    image_hp = create_image("./icon/time-to-study.png",
+    image_hp = create_image("./icon/extraact.png",
                             120, 120)
     image_home = create_image("./icon/home.png", 45, 45)
     image_tk = create_image("./icon/user.png", 45, 45)
@@ -63,6 +66,7 @@ def ad_home():
     label_hp.pack()
 
     def atv_ad_button_tk():
+        History.save_user(User.user_input, "Truy cập \"Tài khoản\"")
         ad_button_ht.pack_forget()
         ad_button_ht_ctk.pack_forget()
         ad_button_ht_xtk.pack_forget()
@@ -90,6 +94,7 @@ def ad_home():
     ad_button_tk.pack(anchor='w', padx=0, pady=5)
 
     def select_ad_button_tk_tttk():
+        History.save_user(User.user_input, "Truy cập \"Thông tin tài khoản\"")
         ad_root_homepage.destroy()
         AD_InforAccount.ad_inforaccount()
 
@@ -98,6 +103,7 @@ def ad_home():
                                width=290, height=1, anchor="w", padx=64, command=select_ad_button_tk_tttk)
 
     def select_ad_button_tk_dmk():
+        History.save_user(User.user_input, "Truy cập \"Đổi mật khẩu\"")
         ad_root_homepage.destroy()
         AD_PassWord.ad_password()
 
@@ -106,6 +112,7 @@ def ad_home():
                               width=290, height=1, anchor="w", padx=64, command=select_ad_button_tk_dmk)
 
     def atv_ad_button_ht():
+        History.save_user(User.user_input, "Truy cập \"Hệ thống\"")
         ad_button_tk_tttk.pack_forget()
         ad_button_tk_dmk.pack_forget()
         ad_button_dx.pack_forget()
@@ -126,6 +133,7 @@ def ad_home():
     ad_button_ht.pack(anchor='w', padx=0, pady=5)
 
     def select_ad_button_ht_ctk():
+        History.save_user(User.user_input, "Truy cập \"Cấp tài khoản\"")
         ad_root_homepage.destroy()
         AD_CreateAccount.ad_createaccount()
 
@@ -134,6 +142,7 @@ def ad_home():
                               width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_ctk)
 
     def select_ad_button_ht_xtk():
+        History.save_user(User.user_input, "Truy cập \"Xóa tài khoản\"")
         ad_root_homepage.destroy()
         AD_DeleteAccount.ad_deleteaccount()
 
@@ -142,6 +151,7 @@ def ad_home():
                               width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_xtk)
 
     def select_ad_button_ht_clmk():
+        History.save_user(User.user_input, "Truy cập \"Cấp lại mật khẩu\"")
         ad_root_homepage.destroy()
         AD_ResetPassword.ad_resetpassword()
 
@@ -149,6 +159,7 @@ def ad_home():
                                fg="white", bg="#34495E", borderwidth=0, compound="left",
                                width=290, height=1, anchor="w", padx=64, command=select_ad_button_ht_clmk)
     def select_ad_button_history():
+        History.save_user(User.user_input, "Truy cập \"Lịch sử hoạt động\"")
         ad_root_homepage.destroy()
         AD_History.ad_history()
 
@@ -157,6 +168,7 @@ def ad_home():
                                 width=290, height=1, anchor="w", padx=64, command=select_ad_button_history)
 
     def select_ad_access_control():
+        History.save_user(User.user_input, "Truy cập \"Phân quyền\"")
         ad_root_homepage.destroy()
         AD_AccessControl.ad_accesscontrol()
 
