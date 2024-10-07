@@ -184,7 +184,7 @@ def ad_history():
     ad_label_none = Label(frame_hp, bg="#34495E", borderwidth=0, height=1000)
     ad_label_none.pack()
 
-    ad_label = Label(ad_root_history, text="   Cấp tài khoản", fg="#34495E", font=("Arial", 16, "bold"),
+    ad_label = Label(ad_root_history, text="   Lịch sử hoạt động", fg="#34495E", font=("Arial", 16, "bold"),
                      borderwidth=0, relief=RAISED, width=81, height=2, anchor='w', bg="#DEE3EB")
     ad_label.place(x=292, y=0)
 
@@ -286,7 +286,7 @@ def ad_history():
     data = [
         ("08:00", "Nguyễn Văn A", "001", "Nguyễn Văn A", "Đăng nhập"),
         ("09:00", "Trần Thị B", "002", "Trần Thị B", "Đăng nhập"),
-        ("10:00", "Lê Văn C", "003", "Lê Văn C", "Đăng nhập"),
+        ("10:00", "Lê Văn C", "003", "Lê Văn C", "sing nhập"),
         ("11:01", "Phạm Thị D", "004", "Phạm Thị D", "Đăng nhập"),
         ("11:01", "Phạm Thị D", "004", "Phạm Thị D", "Đăng nhập"),
         ("11:01", "Phạm Thị D", "004", "Phạm Thị D", "Đăng nhập")

@@ -1,5 +1,5 @@
 import cv2
-import face_recognition
+from deepface import DeepFace
 
 # Hàm chụp ảnh từ camera
 def capture_image():
@@ -24,37 +24,20 @@ def capture_image():
     cv2.destroyAllWindows()
     return image_path
 
-# Hàm so sánh khuôn mặt giữa ảnh chụp và ảnh có sẵn
+# Hàm so sánh khuôn mặt
 def compare_faces(image1_path, image2_path):
-    # Load ảnh và tìm mã nhận diện khuôn mặt
-    img1 = face_recognition.load_image_file(image1_path)
-    img2 = face_recognition.load_image_file(image2_path)
+    result = DeepFace.verify(image1_path, image2_path)
 
-    # Tìm mã nhận diện khuôn mặt (encoding) từ ảnh
-    encodings_img1 = face_recognition.face_encodings(img1)
-    encodings_img2 = face_recognition.face_encodings(img2)
-
-    # Kiểm tra nếu không tìm thấy khuôn mặt trong một trong hai ảnh
-    if len(encodings_img1) == 0 or len(encodings_img2) == 0:
-        print("Không phát hiện được khuôn mặt trong một trong hai ảnh.")
-        return
-
-    # Lấy mã nhận diện khuôn mặt đầu tiên
-    encoding1 = encodings_img1[0]
-    encoding2 = encodings_img2[0]
-
-    # So sánh mã nhận diện khuôn mặt
-    results = face_recognition.compare_faces([encoding1], encoding2)
-    if results[0]:
+    if result["verified"]:
         print("Khuôn mặt khớp với nhau!")
     else:
         print("Khuôn mặt không khớp!")
 
-# Chụp ảnh từ camera
-captured_image_path = capture_image()
+# Chụp ảnh từ camera và lưu lại
+captured_image_path = "C://Users//DO TRUNG QUAN//Desktop//Itsempe.jpg"
 
 # Đường dẫn tới ảnh có sẵn để so sánh
-pre_existing_image_path = "D://HUST//testKTHP.jpg"
+pre_existing_image_path = "C://Users//DO TRUNG QUAN//Desktop//Itsempe.jpg"
 
-# So sánh hai khuôn mặt
+# So sánh khuôn mặt vừa chụp với ảnh có sẵn
 compare_faces(captured_image_path, pre_existing_image_path)

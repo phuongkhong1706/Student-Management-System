@@ -1,9 +1,12 @@
+from datetime import datetime
+import random
+import string
 from tkinter import *
-
+import mysql.connector
 from tkcalendar import DateEntry
 from PIL import Image, ImageTk
 from tkinter.ttk import Combobox
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 import AD_AccessControl
 import AD_DeleteAccount
@@ -12,6 +15,8 @@ import AD_Home
 import AD_InforAccount
 import AD_PassWord
 import AD_ResetPassword
+
+data = []
 
 
 def ad_createaccount():
@@ -226,11 +231,11 @@ def ad_createaccount():
     ad_label_user.place(x=350, y=230)
 
     # Tạo combo box đối tượng sử dụng
-    ad_combobox_find_user_options = ["Quản trị viên", "Cán bộ phòng đào tạo",
+    ad_combobox_find_user_options = ["Admin", "Cán bộ phòng đào tạo",
                                      "Cán bộ phòng CTSV", "Sinh viên", "Giảng viên"]
     ad_combobox_find_user = Combobox(ad_root_createaccount,
                                      values=ad_combobox_find_user_options, width=20, state="readonly")
-    ad_combobox_find_user.set("Quản trị viên")
+    ad_combobox_find_user.set("Admin")
 
     ad_combobox_find_user.place(x=520, y=230)
 
@@ -246,83 +251,225 @@ def ad_createaccount():
                                  fg="black", borderwidth=0)
     ad_label_list_create.place(x=310, y=350)
 
+    # Hàm kết nối đến MySQL và lấy dữ liệu từ bảng 'list_create'
+    def fetch_data_from_mysql(query, params=None):
+        try:
+            # Kết nối đến MySQL
+            connection = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='dotrungquan183@',  # Đặt mật khẩu của bạn
+                database='student_management'  # Tên database
+            )
+
+            # Tạo con trỏ và thực thi câu truy vấn
+            cursor = connection.cursor()
+            cursor.execute(query, params)  # Sử dụng params trong execute
+
+            # Lấy tất cả các hàng dữ liệu
+            rows = cursor.fetchall()
+
+            # Đóng kết nối
+            cursor.close()
+            connection.close()
+
+            return rows
+        except mysql.connector.Error as error:
+            print(f"Lỗi kết nối MySQL: {error}")
+            return []
+    # Hàm sinh mật khẩu ngẫu nhiên
+    def generate_random_password(length=10):
+        characters = string.digits  # Chỉ sử dụng chữ số
+        return ''.join(random.choice(characters) for _ in range(length))
+
+    # Hàm tạo bảng và chèn tài khoản vào bảng list_account
+    def create_and_insert_accounts(selected_accounts):
+        try:
+            # Kết nối đến MySQL
+            connection = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='dotrungquan183@',  # Đặt mật khẩu của bạn
+                database='student_management'  # Tên database
+            )
+
+            cursor = connection.cursor()
+
+            # Tạo bảng list_account nếu chưa tồn tại
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS list_account (
+                MaTK VARCHAR(255) PRIMARY KEY,
+                MatKhau VARCHAR(255)
+            )
+            """)
+
+            # Chèn tài khoản đã chọn vào bảng
+            for account in selected_accounts:
+                password = generate_random_password()  # Sinh mật khẩu ngẫu nhiên
+                cursor.execute("INSERT INTO list_account (MaTK, MatKhau) VALUES (%s, %s)", (account, password))
+
+            connection.commit()  # Lưu các thay đổi
+            print("Đã thêm các tài khoản vào bảng list_account.")
+
+        except mysql.connector.Error as error:
+            print(f"Lỗi khi tạo bảng hoặc chèn dữ liệu: {error}")
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+
     # Khởi tạo style
     style = ttk.Style()
-
-    # Sử dụng theme 'clam' để hỗ trợ thay đổi màu nền tiêu đề
     style.theme_use('clam')
-
-    # Đặt tên style cho tiêu đề cột với nền xanh dương và chữ trắng
     style.configure("Treeview.Heading", font=("Arial", 12, "bold"),
                     background="#34495E", foreground="white")
-
-    # Đặt style cho các hàng với cỡ chữ
     style.configure("Treeview", font=("Arial", 12), rowheight=25)
-
-    # Hiển thị đường kẻ giữa các hàng và cột
     style.configure("Treeview", highlightthickness=0, bd=0, font=('Arial', 12))
     style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})])
 
-    def show_selected():
-        # Lấy danh sách các tài khoản đã chọn
-        selected_accounts = [data[i][1] for i in range(len(data)) if check_vars[i].get()]
-        print("Tài khoản đã chọn:", selected_accounts)
+    query = "SELECT * from list_create"
+    data = fetch_data_from_mysql(query)
 
-    # Tạo widget Treeview
+    # Tạo danh sách để lưu trạng thái của các checkbox
+    checked_state = [False] * len(data)
+
+    # Các ký tự Unicode cho checkbox
+    unchecked_char = '\u2610'  # '☐'
+    checked_char = '\u2611'  # '☑'
+
+    # Tạo widget Treeview với cột bổ sung cho checkbox
     tree = ttk.Treeview(ad_root_createaccount,
-                        columns=("Thời gian", "Đối tượng sử dụng", "Mã số", "Họ và tên", "Cấp tài khoản"),
+                        columns=("Mã số", "Thời gian", "Đối tượng sử dụng", "Họ và tên", "Cấp tài khoản"),
                         show="headings")
 
     # Đặt tên tiêu đề cho các cột
+    tree.heading("Mã số", text="Mã số")
     tree.heading("Thời gian", text="Thời gian")
     tree.heading("Đối tượng sử dụng", text="Đối tượng sử dụng")
-    tree.heading("Mã số", text="Mã số")
     tree.heading("Họ và tên", text="Họ và tên")
-    tree.heading("Cấp tài khoản", text="Cấp tài khoản")
+    tree.heading("Cấp tài khoản", text="Cấp tài khoản")  # Di chuyển xuống cuối
+
     columns_width = 203
-    for col in ["Thời gian", "Đối tượng sử dụng", "Mã số", "Họ và tên", "Cấp tài khoản"]:
+    for col in ["Mã số", "Thời gian", "Đối tượng sử dụng", "Họ và tên"]:
         tree.column(col, anchor="center", width=columns_width)
 
-    # Dữ liệu mẫu
-    data = [
-        ("08:00", "Nguyễn Văn A", "001", "Nguyễn Văn A"),
-        ("09:00", "Trần Thị B", "002", "Trần Thị B"),
-        ("10:00", "Lê Văn C", "003", "Lê Văn C"),
-        ("11:01", "Phạm Thị D", "004", "Phạm Thị D"),
-        ("11:01", "Phạm Thị D", "004", "Phạm Thị D"),
-        ("11:01", "Phạm Thị D", "004", "Phạm Thị D")
-    ]
+    tree.column("Cấp tài khoản", anchor="center", width=204)  # Đặt lại cột "Cấp tài khoản"
 
     # Thêm dữ liệu vào Treeview
-    for row in data:
-        tree.insert("", "end", values=row)
+    for index, row in enumerate(data):
+        check = checked_char if checked_state[index] else unchecked_char
+        tree.insert("", "end", values=(*row, check))  # Di chuyển checkbox xuống cuối
 
-    # Đặt Treeview vào cửa sổ
+    # Đặt Treeview vào cửa sổ với scrollbar
+    tree_scroll = Scrollbar(ad_root_createaccount, orient="vertical", command=tree.yview)
+    tree.configure(yscrollcommand=tree_scroll.set)
     tree.place(x=310, y=400)
+    tree_scroll.place(x=1310, y=400, height=300)
 
-    # Tạo biến cho các Checkbutton
-    check_vars = [BooleanVar() for _ in data]
+    # Hàm xử lý khi click vào Treeview
+    def on_treeview_click(event):
+        # Lấy vùng được click
+        region = tree.identify('region', event.x, event.y)
+        if region == 'cell':
+            # Lấy cột được click
+            column = tree.identify_column(event.x)
+            if column == '#5':  # Cột '#5' là cột "Cấp tài khoản"
+                # Lấy item được click
+                rowid = tree.identify_row(event.y)
+                if rowid:
+                    index = tree.index(rowid)
+                    # Thay đổi trạng thái checkbox
+                    checked_state[index] = not checked_state[index]
+                    # Cập nhật hiển thị
+                    check = checked_char if checked_state[index] else unchecked_char
+                    values = tree.item(rowid, 'values')
+                    new_values = values[:-1] + (check,)  # Cập nhật cột "Cấp tài khoản"
+                    tree.item(rowid, values=new_values)
 
-    # Thêm Checkbutton bên cạnh Treeview
-    for index in range(len(data)):
-        checkbutton = Checkbutton(ad_root_createaccount, variable=check_vars[index])
-        checkbutton.place(x=columns_width + 1000, y=430 + index * 25)  # Điều chỉnh vị trí để phù hợp với hàng
+    tree.bind('<Button-1>', on_treeview_click)
+
+    def show_selected():
+        # Lấy danh sách các tài khoản đã Cấp tài khoản
+        selected_accounts = [data[i][0] for i in range(len(data)) if checked_state[i]]
+        print("Tài khoản đã Cấp tài khoản:", selected_accounts)
+        # Gọi hàm tạo và chèn tài khoản vào bảng list_account
+        create_and_insert_accounts(selected_accounts)
 
     def select_all():
-        # Đánh dấu tất cả Checkbutton là True
-        for var in check_vars:
-            var.set(True)
+        for i in range(len(checked_state)):
+            checked_state[i] = True
+            check = checked_char
+            rowid = tree.get_children()[i]
+            values = tree.item(rowid, 'values')
+            new_values = values[:-1] + (check,)  # Cập nhật cột "Cấp tài khoản"
+            tree.item(rowid, values=new_values)
 
     def delete_all():
-        # Đánh dấu tất cả Checkbutton là True
-        for var in check_vars:
-            var.set(False)
+        for i in range(len(checked_state)):
+            checked_state[i] = False
+            check = unchecked_char
+            rowid = tree.get_children()[i]
+            values = tree.item(rowid, 'values')
+            new_values = values[:-1] + (check,)  # Cập nhật cột "Cấp tài khoản"
+            tree.item(rowid, values=new_values)
 
-    ad_button_select_all = Button(ad_root_createaccount, text="Chọn tất cả", font=("Arial", 12, "bold"), fg="white",
+    def ad_query():
+        # Lấy dữ liệu từ các widget
+        date = ad_text_find_date.get()  # Lấy ngày từ DateEntry
+        hour = hour_spinbox.get()  # Lấy giờ từ Spinbox
+        minute = minute_spinbox.get()  # Lấy phút từ Spinbox
+        second = second_spinbox.get()  # Lấy giây từ Spinbox
+
+        # Chuyển đổi định dạng ngày từ mm/dd/yy sang mm-dd-yyyy
+        date_obj = datetime.strptime(date, "%m/%d/%y")  # Sử dụng %y cho năm 2 chữ số
+        formatted_date = date_obj.strftime("%Y-%m-%d")  # Định dạng lại thành mm-dd-yyyy
+
+        # Tạo chuỗi datetime
+        datetime_str = f"{formatted_date} {hour}:{minute}:{second}"  # Tạo chuỗi datetime
+
+        user_type = ad_combobox_find_user.get()  # Lấy đối tượng sử dụng từ Combobox
+        student_info = ad_text_find_student.get("1.0", "end-1c").strip()  # Lấy MSSV/họ tên từ Text widget
+
+        query = """
+                SELECT MaSo, ThoiGian, DoiTuongSuDung, HoVaTen 
+                FROM list_create 
+                WHERE ThoiGian = %s AND DoiTuongSuDung = %s AND (MaSo = %s OR HoVaTen LIKE %s)
+                """
+        params = (datetime_str, user_type, student_info, f"%{student_info}%")  # Cập nhật tham số cho truy vấn
+        data = fetch_data_from_mysql(query, params)  # Giả định rằng hàm này nhận params
+
+        # Xóa tất cả các mục hiện tại trong Treeview
+        for item in tree.get_children():
+            tree.delete(item)
+
+        # Thêm dữ liệu mới vào Treeview
+        for index, row in enumerate(data):
+            check = checked_char if checked_state[index] else unchecked_char
+            tree.insert("", "end", values=(*row, check))  # Thêm dữ liệu mới
+
+        # Điều chỉnh kích thước Treeview
+        max_visible_rows = 10  # Số dòng tối đa mà bạn muốn hiển thị
+        row_count = len(data)  # Đếm số dòng trả về
+
+        # Nếu số dòng trả về nhỏ hơn max_visible_rows, điều chỉnh kích thước Treeview
+        if row_count < max_visible_rows:
+            tree.config(height=row_count)  # Đặt chiều cao tương ứng với số dòng trả về
+        else:
+            tree.config(
+                height=max_visible_rows)  # Giữ kích thước tối đa nếu số dòng trả về lớn hơn hoặc bằng max_visible_rows
+
+    ad_button_find = Button(ad_root_createaccount, text="Tìm kiếm", font=("Arial", 12, "bold"),
+                            fg="white",
+                            bg="#34495E", command=ad_query)
+    ad_button_find.place(x=1241, y=275)
+
+    ad_button_select_all = Button(ad_root_createaccount, text="Chọn tất cả", font=("Arial", 12, "bold"),
+                                  fg="white",
                                   bg="#34495E", command=select_all)
     ad_button_select_all.place(x=1095, y=350)
 
-    ad_button_delete_all = Button(ad_root_createaccount, text="Bỏ chọn tất cả", font=("Arial", 12, "bold"), fg="white",
+    ad_button_delete_all = Button(ad_root_createaccount, text="Bỏ chọn tất cả", font=("Arial", 12, "bold"),
+                                  fg="white",
                                   bg="#34495E", command=delete_all)
     ad_button_delete_all.place(x=1200, y=350)
 
