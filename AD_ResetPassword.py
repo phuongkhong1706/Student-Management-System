@@ -53,7 +53,7 @@ def ad_resetpassword():
 
         return photo
 
-    image_hp = create_image("./icon/icons8-scaler-academy-144.png",
+    image_hp = create_image("./icon/time-to-study.png",
                             120, 120)
     image_home = create_image("./icon/home.png", 45, 45)
     image_tk = create_image("./icon/user.png", 45, 45)
