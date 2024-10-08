@@ -1,4 +1,6 @@
 from tkinter import *
+import tkinter as tk
+from tkinter import ttk
 from PIL import Image, ImageTk
 from tkcalendar import DateEntry
 
@@ -10,14 +12,14 @@ from tkcalendar import DateEntry
 # import AD_ResetPassword
 # import AD_AccessControl
 
-# def sv_password():
-sv_root_password = Tk()
-sv_root_password.title("Đổi mật khẩu")
-sv_root_password.state("zoomed")
+# def sv_bangdiemcanhan():
+sv_root_bangdiemcanhan = Tk()
+sv_root_bangdiemcanhan.title("Bảng điểm cá nhân")
+sv_root_bangdiemcanhan.state("zoomed")
 
 # Tạo canvas và scrollbar
-canvas = Canvas(sv_root_password, borderwidth=0)
-scrollbar = Scrollbar(sv_root_password, orient=VERTICAL, command=canvas.yview)
+canvas = Canvas(sv_root_bangdiemcanhan, borderwidth=0)
+scrollbar = Scrollbar(sv_root_bangdiemcanhan, orient=VERTICAL, command=canvas.yview)
 canvas.configure(yscrollcommand=scrollbar.set)
 
 # Tạo một frame bên trong canvas
@@ -113,20 +115,20 @@ sv_button_tk = Button(frame_hp, text="    Tài khoản", font=("Arial", 14, "bol
                       command=atv_sv_button_tk)
 sv_button_tk.pack(anchor='w', padx=0, pady=5)
 
-
 def select_sv_button_tk_tttk():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_InforAccount.sv_inforaccount()
 
 sv_button_tk_tttk = Button(frame_hp, text="   Thông tin tài khoản", font=("Arial", 14, "bold"),
                                fg="white", bg="#34495E", borderwidth=0, compound="left",
-                               width=290, height=1, anchor="w", padx=64, command=select_sv_button_tk_tttk)
-sv_button_tk_tttk.pack(anchor='w', padx=0, pady=5)
+                               width=290, height=1, anchor="w", padx=64, command = select_sv_button_tk_tttk)
 
+def select_sv_button_tk_dmk():
+    sv_root_bangdiemcanhan.destroy()
+    # AD_InforAccount.sv_inforaccount()
 sv_button_tk_dmk = Button(frame_hp, text="   Đổi mật khẩu", font=("Arial", 14, "bold"),
-                          fg="#34495E", bg="white", borderwidth=0, compound="left",
-                          width=290, height=1, anchor="w", padx=64)
-sv_button_tk_dmk.pack(anchor='w', padx=0, pady=5)
+                          fg="white", bg="#34495E", borderwidth=0, compound="left",
+                          width=290, height=1, anchor="w", padx=64, command=select_sv_button_tk_dmk)
 
 def atv_sv_button_kqht():
     sv_button_tk_tttk.pack_forget()
@@ -166,26 +168,20 @@ sv_button_kqht = Button(frame_hp, text="    Kết quả học tập", font=("Ari
                       width=290, height=50, anchor="w", padx=10, command=atv_sv_button_kqht)
 sv_button_kqht.pack(anchor='w', padx=0, pady=5)
 
-
-def select_sv_button_kqht_bdcn():
-    sv_root_password.destroy()
-    # AD_CreateAccount.sv_createaccount()
-
-
 sv_button_kqht_bdcn = Button(frame_hp, text="   Bảng điểm cá nhân", font=("Arial", 14, "bold"),
-                          fg="white", bg="#34495E", borderwidth=0, compound="left",
-                          width=290, height=1, anchor="w", padx=64, command=select_sv_button_kqht_bdcn)
-
+                          fg="#34495E", bg="white", borderwidth=0, compound="left",
+                          width=290, height=1, anchor="w", padx=64)
+sv_button_kqht_bdcn.pack(anchor='w', padx=0, pady=5)
 
 def select_sv_button_kqht_pt():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_DeleteAccount.sv_deleteaccount()
 
 
 sv_button_kqht_pt = Button(frame_hp, text="   Phúc tra", font=("Arial", 14, "bold"),
                           fg="white", bg="#34495E", borderwidth=0, compound="left",
                           width=290, height=1, anchor="w", padx=64, command=select_sv_button_kqht_pt)
-
+sv_button_kqht_pt.pack(anchor='w', padx=0, pady=5)
 def atv_sv_button_hdnk():
     sv_button_tk_tttk.pack_forget()
     sv_button_tk_dmk.pack_forget()
@@ -222,7 +218,7 @@ sv_button_hdnk.pack(anchor='w', padx=0, pady=5)
 
 
 def select_sv_button_hdnk_dkhd():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_CreateAccount.sv_createaccount()
 
 
@@ -232,7 +228,7 @@ sv_button_hdnk_dkhd = Button(frame_hp, text="   Đăng ký hoạt động", font
 
 
 def select_sv_button_hdnk_mchd():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_DeleteAccount.sv_deleteaccount()
 
 
@@ -241,7 +237,7 @@ sv_button_hdnk_mchd = Button(frame_hp, text="   Minh chứng", font=("Arial", 14
                           width=290, height=1, anchor="w", padx=64, command=select_sv_button_hdnk_mchd)
 
 def select_sv_button_hdnk_cdrl():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_DeleteAccount.sv_deleteaccount()
 
 
@@ -250,7 +246,7 @@ sv_button_hdnk_cdrl = Button(frame_hp, text="   Chấm điểm rèn luyện", fo
                           width=290, height=1, anchor="w", padx=64, command=select_sv_button_hdnk_cdrl)
 
 def select_sv_button_hdnk_tckqrl():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_DeleteAccount.sv_deleteaccount()
 
 
@@ -259,7 +255,7 @@ sv_button_hdnk_tckqrl = Button(frame_hp, text="   Tra cứu KQRL", font=("Arial"
                           width=290, height=1, anchor="w", padx=64, command=select_sv_button_hdnk_tckqrl)
 
 def select_sv_button_hdnk_knhd():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_DeleteAccount.sv_deleteaccount()
 
 
@@ -301,7 +297,7 @@ sv_button_khht.pack(anchor='w', padx=0, pady=5)
 
 
 def select_sv_button_khht_dkhp():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_CreateAccount.sv_createaccount()
 
 
@@ -311,7 +307,7 @@ sv_button_khht_dkhp = Button(frame_hp, text="   Đăng ký học phần", font=(
 
 
 def select_sv_button_khht_dklhp():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_DeleteAccount.sv_deleteaccount()
 
 
@@ -321,7 +317,7 @@ sv_button_khht_dklhp = Button(frame_hp, text="   Đăng ký lớp học phần",
 
 
 def select_sv_button_khht_tkb():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_DeleteAccount.sv_deleteaccount()
 
 
@@ -360,7 +356,7 @@ sv_button_hphi.pack(anchor='w', padx=0, pady=5)
 
 
 def select_sv_button_hphi_xhp():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_CreateAccount.sv_createaccount()
 
 
@@ -370,7 +366,7 @@ sv_button_hphi_xhp = Button(frame_hp, text="   Xem học phí", font=("Arial", 1
 
 
 def select_sv_button_hphi_dhp():
-    sv_root_password.destroy()
+    sv_root_bangdiemcanhan.destroy()
     # AD_DeleteAccount.sv_deleteaccount()
 
 
@@ -386,41 +382,27 @@ sv_button_dx.pack(anchor='w', padx=0, pady=5)
 sv_label_none = Label(frame_hp, bg="#34495E", borderwidth=0, height=1000)
 sv_label_none.pack()
 
-sv_label = Label(sv_root_password, text="   Đổi mật khẩu", fg="#34495E", font=("Arial", 16, "bold"),
+sv_label = Label(sv_root_bangdiemcanhan, text="   Bảng điểm cá nhân", fg="#34495E", font=("Arial", 16, "bold"),
                  borderwidth=0, relief=RAISED, width=81, height=2, anchor='w', bg="#DEE3EB")
 sv_label.place(x=292, y=0)
 
-sv_label_matk = Label(sv_root_password, text="Mã tài khoản", fg="#34495E", font=("Arial", 12, "bold"),
-                      borderwidth=0, width=10, height=1, anchor='w')
-sv_label_matk.place(x=450, y=175)
+#code giao diện ở đây
+# Tạo LabelFrame bo góc với tên là 'Tra cứu'
+groupbox = ttk.LabelFrame(sv_root_bangdiemcanhan, text="Tra cứu", padding=(10, 10))
+groupbox.pack(padx=10, pady=10)
 
-sv_text_matk = Text(sv_root_password, borderwidth=2, relief=RAISED, width=64, height=1)
-sv_text_matk.place(x=647, y=173)
+# Tạo nhãn và combobox cho "Học kỳ"
+label_hocky = ttk.Label(groupbox, text="Học kỳ:")
+label_hocky.grid(row=0, column=0, padx=5, pady=5)
 
-sv_label_mkc = Label(sv_root_password, text="Mật khẩu cũ", fg="#34495E", font=("Arial", 12, "bold"),
-                     borderwidth=0, width=10, height=1, anchor='w')
-sv_label_mkc.place(x=450, y=235)
+combobox_hocky = ttk.Combobox(groupbox, values=["Kỳ 1", "Kỳ 2", "Kỳ 3", "Kỳ 4"])
+combobox_hocky.grid(row=0, column=1, padx=5, pady=5)
 
-sv_text_mkc = Text(sv_root_password, borderwidth=2, relief=RAISED, width=64, height=1)
-sv_text_mkc.place(x=647, y=233)
+# Tạo nhãn và ô nhập liệu cho "Mã học phần"
+label_mahp = ttk.Label(groupbox, text="Mã học phần:")
+label_mahp.grid(row=1, column=0, padx=5, pady=5)
 
-sv_label_mkm = Label(sv_root_password, text="Mật khẩu mới", fg="#34495E", font=("Arial", 12, "bold"),
-                     borderwidth=0, width=10, height=1, anchor='w')
-sv_label_mkm.place(x=450, y=295)
+entry_mahp = ttk.Entry(groupbox)
+entry_mahp.grid(row=1, column=1, padx=5, pady=5)
 
-sv_text_mkm = Text(sv_root_password, borderwidth=2, relief=RAISED, width=64, height=1)
-sv_text_mkm.place(x=647, y=293)
-
-sv_label_nlmkm = Label(sv_root_password, text="Nhập lại mật khẩu mới", fg="#34495E", font=("Arial", 12, "bold"),
-                       borderwidth=0, width=17, height=1, anchor='w')
-sv_label_nlmkm.place(x=450, y=355)
-
-sv_text_nlmkm = Text(sv_root_password, borderwidth=2, relief=RAISED, width=64, height=1)
-sv_text_nlmkm.place(x=648, y=353)
-
-sv_button_gmk = Button(sv_root_password, text="Gửi", fg="#34495E", font=("Arial", 10, "bold"),
-                       borderwidth=2, relief=RAISED, width=6, height=1, anchor=CENTER, bg="white")
-
-sv_button_gmk.place(x=1107, y=415)
-
-sv_root_password.mainloop()
+sv_root_bangdiemcanhan.mainloop()
