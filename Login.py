@@ -1,11 +1,9 @@
-from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
 
-import AD_Home
 import mysql
 
-import AD_Home_Test
+import AD_Home
 import ConnectionToMySQL
 import History
 import User
@@ -112,6 +110,7 @@ def paste_text(widget):
         # Bắt lỗi nếu clipboard rỗng hoặc không có dữ liệu, bỏ qua lỗi này
         pass
 
+
 # Hiển thị menu ngữ cảnh khi nhấn chuột phải
 def show_context_menu(event):
     widget = event.widget  # Lấy widget nơi sự kiện chuột phải xảy ra
@@ -120,6 +119,7 @@ def show_context_menu(event):
     # Hiển thị menu ngữ cảnh tại vị trí con trỏ chuột
     context_menu.post(event.x_root, event.y_root)
 
+
 # Tạo menu ngữ cảnh (chuột phải)
 context_menu = Menu(root_login, tearoff=0)  # Tạo menu không có phần gạch ngang ở đầu
 context_menu.add_command(label="Paste")  # Thêm tùy chọn "Dán" vào menu
@@ -127,6 +127,5 @@ context_menu.add_command(label="Paste")  # Thêm tùy chọn "Dán" vào menu
 # Ràng buộc sự kiện chuột phải (Button-3) cho các trường nhập liệu
 text_tentk.bind("<Button-3>", show_context_menu)  # Ràng buộc cho text_tentk
 text_mk.bind("<Button-3>", show_context_menu)  # Ràng buộc cho text_mk
-
 
 root_login.mainloop()
