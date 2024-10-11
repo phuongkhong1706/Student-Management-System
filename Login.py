@@ -1,10 +1,11 @@
 from datetime import datetime
-
 from tkinter import *
 from tkinter import messagebox
 
 import AD_Home
 import mysql
+
+import AD_Home_Test
 import ConnectionToMySQL
 import History
 import User
@@ -16,12 +17,15 @@ def run_program():
 
     if User.user_input == "" or password_input == "":
         root_login.destroy()  # Đóng cửa sổ đăng nhập
+        User.ad_root_homepage = Tk()
+        User.ad_root_homepage.title("Trang chủ")
+        User.ad_root_homepage.state("zoomed")
         AD_Home.ad_home()  # Chuyển đến trang AD_Home
         return  # Kết thúc hàm sau khi chuyển hướng
         # messagebox.showerror("Lỗi", "Vui lòng nhập tài khoản và mật khẩu")
 
     # Kiểm tra tài khoản có bắt đầu bằng "DT" không
-    if User.user_input.startswith("AD"):
+    if User.user_input.startswith("CT"):
         History.save_user(User.user_input, "Đăng nhập")
         root_login.destroy()  # Đóng cửa sổ đăng nhập
         AD_Home.ad_home()  # Chuyển đến trang AD_Home
@@ -58,7 +62,6 @@ def run_program():
 
 root_login = Tk()
 root_login.title("Đăng nhập")
-
 root_login.state('zoomed')
 
 label_dn = Label(root_login, text="ĐĂNG NHẬP BẰNG TÀI KHOẢN", font=("Arial", 25, "bold"), fg="#34495E")
@@ -85,5 +88,45 @@ button_quenmk.place(relx=0.693, rely=0.6)
 button_dn = Button(frame, width=29, height=1, text="Đăng nhập", font=("Arial", 14, "bold"), bg="#34495E", fg="white",
                    command=run_program)
 button_dn.place(relx=0.1, rely=0.74)
+
+
+def focus_on_mk(event):
+    text_mk.focus_set()  # Chuyển tiêu điểm tới text_mk
+
+
+def call_run_program(event):
+    run_program()  # Gọi hàm run_program
+
+
+# Ràng buộc sự kiện Enter cho text_tentk và text_mk
+text_tentk.bind("<Return>", focus_on_mk)  # Khi nhấn Enter trong text_tentk, chuyển tới text_mk
+text_mk.bind("<Return>", call_run_program)  # Khi nhấn Enter trong text_mk, gọi hàm run_program
+
+
+# Chức năng dán văn bản từ menu chuột phải
+def paste_text(widget):
+    try:
+        # Chèn nội dung từ clipboard vào vị trí hiện tại của con trỏ trong widget
+        widget.insert(INSERT, widget.clipboard_get())
+    except TclError:
+        # Bắt lỗi nếu clipboard rỗng hoặc không có dữ liệu, bỏ qua lỗi này
+        pass
+
+# Hiển thị menu ngữ cảnh khi nhấn chuột phải
+def show_context_menu(event):
+    widget = event.widget  # Lấy widget nơi sự kiện chuột phải xảy ra
+    # Cập nhật lệnh "Dán" trong menu ngữ cảnh để dán nội dung vào widget tương ứng
+    context_menu.entryconfig("Paste", command=lambda: paste_text(widget))
+    # Hiển thị menu ngữ cảnh tại vị trí con trỏ chuột
+    context_menu.post(event.x_root, event.y_root)
+
+# Tạo menu ngữ cảnh (chuột phải)
+context_menu = Menu(root_login, tearoff=0)  # Tạo menu không có phần gạch ngang ở đầu
+context_menu.add_command(label="Paste")  # Thêm tùy chọn "Dán" vào menu
+
+# Ràng buộc sự kiện chuột phải (Button-3) cho các trường nhập liệu
+text_tentk.bind("<Button-3>", show_context_menu)  # Ràng buộc cho text_tentk
+text_mk.bind("<Button-3>", show_context_menu)  # Ràng buộc cho text_mk
+
 
 root_login.mainloop()

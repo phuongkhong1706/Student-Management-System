@@ -10,7 +10,7 @@ def save_user(user_input, action):
 
     try:
         # Lấy thông tin từ bảng list_create theo MaSo
-        query = "SELECT DoiTuongSuDung, HoVaTen FROM list_create WHERE MaSo = %s"
+        query = "SELECT DoiTuongSuDung, HoVaTen FROM user_information WHERE MaSo = %s"
         cursor.execute(query, (user_input,))
         result = cursor.fetchone()
 
